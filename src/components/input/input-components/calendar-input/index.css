@@ -1,0 +1,32 @@
+.rdp {
+  --rdp-accent-color: rgb(55, 125, 216) !important;
+  --rdp-background-color: #ebeef3 !important;
+  --rdp-outline: none;
+  --rdp-outline-selected: none;
+}
+.rdp-nav_icon {
+  height: 14px;
+  width: 14px;
+}
+
+.rdp-caption_label {
+  font-size: 14px;
+  color: black;
+}
+
+.rdp-head_cell {
+  font-size: 12px;
+  color: rgb(116, 116, 116);
+  opacity: 80;
+}
+
+.rdp-row {
+  font-size: 14px;
+}
+
+.rdp-day_selected {
+  background-color: rgb(46, 129, 238);
+}
+.rdp-day_selected:hover {
+  background-color: rgb(247, 245, 245);
+}
