@@ -1,8 +1,6 @@
-import React, { ReactNode, useState } from 'react';
-import { DropdownOption } from '../../../../utils';
-import { Icon } from '../../../icon/Icon';
-import { InputError } from '../../input-error/InputError';
-import InputLabel from '../../input-label/InputLabel';
+import React, { useState } from 'react';
+import { DropdownOption } from '@/utils';
+import { Icon, InputLabel, InputError } from '@/components';
 
 export interface DropdownProps {
   options: DropdownOption[];
@@ -51,13 +49,13 @@ export const DropdownInput: React.FC<DropdownProps> = ({
               )}`}
               id="options"
             >
-              {dropdownValue?.value || value}
+              {dropdownValue?.value || value || 'Please select'}
               <Icon iconType="arrowDown" />
             </button>
           </span>
         </div>
         {isOpen && (
-          <div className="absolute left-0 mt-2 w-full rounded-md shadow-lg">
+          <div className="absolute left-0 mt-2 w-full rounded-md shadow-lg z-50">
             <div className="rounded-md bg-white shadow-xs">
               <div className="py-1 flex flex-col" role="menu">
                 {options.map((option, index) => (

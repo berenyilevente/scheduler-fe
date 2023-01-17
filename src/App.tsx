@@ -1,6 +1,16 @@
+import { Routes, Route } from 'react-router-dom';
+import { Calendar, Settings, Admin } from '@/pages';
+import { RouteUrl } from '@/utils';
+
 function App() {
   return (
-    <div className="text-3xl font-bold underline">Welcome to scheduler</div>
+    <div>
+      <Routes>
+        <Route path={RouteUrl.Calendar} element={<Calendar />} />
+        <Route path={RouteUrl.Settings} element={<Settings />} />
+        <Route path={RouteUrl.Admin} element={<Admin />} />
+      </Routes>
+    </div>
   );
 }
 

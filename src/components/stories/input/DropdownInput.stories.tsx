@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import {
   DropdownInput as DropdownComponent,
   DropdownProps,
-} from '../../input/input-components';
+} from '@/components';
 import { DropdownOption } from '../../../utils';
 
 export default {

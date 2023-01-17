@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { timeValues } from '../../../../utils';
-import { Icon } from '../../../icon/Icon';
-import { InputError } from '../../input-error/InputError';
-import InputLabel from '../../input-label/InputLabel';
+import { timeValues } from '@/utils';
+import { Icon, InputLabel, InputError } from '@/components';
 
 export interface TimepickerInputProps {
   onChange: (time: string) => void;

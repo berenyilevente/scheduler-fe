@@ -8,7 +8,7 @@ export interface IconProps {
 
 export const Icon: FC<IconProps> = ({ iconType, onClick }) => {
   return (
-    <div className="select-none" onClick={onClick}>
+    <div className="select-none hover:cursor-pointer" onClick={onClick}>
       {iconMap[iconType]}
     </div>
   );

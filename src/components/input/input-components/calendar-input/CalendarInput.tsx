@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import InputLabel from '../../input-label/InputLabel';
 import './index.css';
-import { InputError } from '../../input-error/InputError';
-import { Icon } from '../../../icon/Icon';
+import { Icon, InputLabel, InputError } from '@/components';
 
 export interface CalendarInputProps {
   label?: string;

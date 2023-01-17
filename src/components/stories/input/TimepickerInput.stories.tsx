@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import {
   TimepickerInput as TimepickerInputComponent,
   TimepickerInputProps,
-} from '../../input/input-components';
+} from '@/components';
 
 export default {
   title: 'Input/TimepickerInput',

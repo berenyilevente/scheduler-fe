@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import {
   PhoneInput as PhoneInputComponent,
   PhoneInputProps,
-} from '../../input/input-components';
+} from '@/components';
 
 export default {
   title: 'Input/PhoneInput',

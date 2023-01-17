@@ -7,7 +7,7 @@ export interface InputLabelProps {
   errorMessage?: string;
 }
 
-const InputLabel: React.FC<InputLabelProps> = ({
+export const InputLabel: React.FC<InputLabelProps> = ({
   label,
   children,
   required,
@@ -29,4 +29,3 @@ const InputLabel: React.FC<InputLabelProps> = ({
     </div>
   );
 };
-export default InputLabel;

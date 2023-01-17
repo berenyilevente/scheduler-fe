@@ -1,7 +1,5 @@
 import { ChangeEvent, forwardRef, useState } from 'react';
-import { Icon } from '../../../icon/Icon';
-import { InputError } from '../../input-error/InputError';
-import InputLabel from '../../input-label/InputLabel';
+import { Icon, InputLabel, InputError } from '@/components';
 
 export interface PhoneInputProps {
   className?: string;

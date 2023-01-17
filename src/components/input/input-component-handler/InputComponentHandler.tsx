@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentType } from '../../../utils';
+import { InputComponent } from '@/utils';
 import {
   TextInput,
   EmailInput,
@@ -11,33 +11,63 @@ import {
 } from '../input-components';
 
 export interface InputComponentHandlerProps {
-  component: ComponentType;
+  component: string;
   onChange: (value: string) => void;
+  label: string;
+  required: boolean;
 }
 
 export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
   component,
   onChange,
+  label,
+  required,
 }) => {
-  const renderComponent = (component: ComponentType): JSX.Element => {
+  const renderComponent = (component: string): JSX.Element => {
     if (component === undefined) {
-      <div>No component found!</div>;
+      return <></>;
     }
     switch (component) {
-      case ComponentType.Text:
-        return <TextInput onChange={onChange} />;
-      case ComponentType.Email:
-        return <EmailInput onChange={onChange} />;
-      case ComponentType.Calendar:
-        return <CalendarInput onChange={onChange} />;
-      case ComponentType.Timepicker:
-        return <TimepickerInput onChange={onChange} />;
-      case ComponentType.Switch:
-        return <SwitchInput onChange={onChange} />;
-      case ComponentType.Password:
-        return <PasswordInput onChange={onChange} />;
-      case ComponentType.Phone:
-        return <PhoneInput onChange={onChange} />;
+      case InputComponent.Text:
+        return (
+          <TextInput onChange={onChange} label={label} required={required} />
+        );
+      case InputComponent.Email:
+        return (
+          <EmailInput onChange={onChange} label={label} required={required} />
+        );
+      case InputComponent.Calendar:
+        return (
+          <CalendarInput
+            onChange={onChange}
+            label={label}
+            required={required}
+          />
+        );
+      case InputComponent.Timepicker:
+        return (
+          <TimepickerInput
+            onChange={onChange}
+            label={label}
+            required={required}
+          />
+        );
+      case InputComponent.Switch:
+        return (
+          <SwitchInput onChange={onChange} label={label} required={required} />
+        );
+      case InputComponent.Password:
+        return (
+          <PasswordInput
+            onChange={onChange}
+            label={label}
+            required={required}
+          />
+        );
+      case InputComponent.Phone:
+        return (
+          <PhoneInput onChange={onChange} label={label} required={required} />
+        );
       default:
         return <div>No component found!</div>;
     }

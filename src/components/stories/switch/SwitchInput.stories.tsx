@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import {
   SwitchInput as SwitchInputComponent,
   SwitchInputProps,
-} from '../input/input-components';
+} from '@/components';
 
 export default {
   title: 'Input/SwitchInput',

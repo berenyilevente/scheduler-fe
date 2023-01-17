@@ -1,6 +1,5 @@
 import { ChangeEvent, forwardRef, useState } from 'react';
-import { InputError } from '../../input-error/InputError';
-import InputLabel from '../../input-label/InputLabel';
+import { InputLabel, InputError } from '@/components';
 
 export interface TextInputProps {
   className?: string;
