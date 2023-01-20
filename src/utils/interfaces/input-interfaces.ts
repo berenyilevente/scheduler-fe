@@ -8,7 +8,7 @@ export interface InputProps {
   timepicker: string;
 }
 
-export interface CreateInputArgs {
+export interface PostInputArgs {
   inputType: string;
   label: string;
   required: boolean;

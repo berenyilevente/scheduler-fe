@@ -1,4 +1,4 @@
-import { CreateInputArgs, GetInputArgs } from '@/utils';
+import { PostInputArgs, GetInputArgs } from '@/utils';
 import {
   InputActionTypes,
   GET_INPUTS_FAILURE,
@@ -15,7 +15,7 @@ import {
 export interface IDefaultInputState {
   isLoading: boolean;
   inputFields: GetInputArgs[];
-  inputField: CreateInputArgs | undefined;
+  inputField: PostInputArgs | undefined;
   error: string | null;
   createInputSuccess: boolean;
   deleteInputSuccess: boolean;

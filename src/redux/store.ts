@@ -3,8 +3,9 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import InputReducer from './input-state/inputReducer';
+import InputReducer from './state/input-state/inputReducer';
 import { Action, configureStore } from '@reduxjs/toolkit';
+import BookingLayoutReducer from './state/booking-layout-state/bookingLayoutReducer';
 
 const persistConfig = {
   key: 'root',
@@ -13,6 +14,7 @@ const persistConfig = {
 
 export const rootReducer = combineReducers({
   inputs: InputReducer,
+  bookingLayouts: BookingLayoutReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,4 +1,4 @@
-import { GetInputArgs, CreateInputArgs } from '@/utils';
+import { GetInputArgs, PostInputArgs } from '@/utils';
 
 export const GET_INPUTS_REQUEST = 'GET_INPUTS_REQUEST';
 export const GET_INPUTS_SUCCESS = 'GET_INPUTS_SUCCESS';
@@ -23,7 +23,7 @@ export interface PostInputRequest {
 }
 export interface PostInputSuccess {
   type: typeof POST_INPUT_SUCCESS;
-  payload: CreateInputArgs;
+  payload: PostInputArgs;
 }
 export interface PostInputFailure {
   type: typeof POST_INPUT_FAILURE;

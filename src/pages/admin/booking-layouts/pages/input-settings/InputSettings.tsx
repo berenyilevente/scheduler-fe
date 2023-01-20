@@ -16,7 +16,7 @@ import {
   deleteInputAction,
   getInputAction,
   postInputAction,
-} from '@/redux/input-state/inputActions';
+} from '@/redux/state/input-state/inputActions';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { DeleteInputModal } from '../../components/delete-input-modal/DeleteInputModal';
 import { useTranslation } from 'react-i18next';

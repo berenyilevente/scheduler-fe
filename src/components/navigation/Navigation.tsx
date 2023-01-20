@@ -10,6 +10,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   isAuthenticated,
   children,
 }) => {
+  //TODO impplement auth
   return (
     <div className="absolute top-0 left-0 right-0">
       <div className="grid col-span-2 gap-x-0">

@@ -11,7 +11,7 @@ import {
 } from './inputActionTypes';
 import client from '@/api/client';
 import { Dispatch } from 'redux';
-import { CreateInputArgs } from '@/utils';
+import { PostInputArgs } from '@/utils';
 
 export const getInputAction = () => async (dispatch: Dispatch) => {
   dispatch({
@@ -32,7 +32,7 @@ export const getInputAction = () => async (dispatch: Dispatch) => {
 };
 
 export const postInputAction =
-  (inputField: CreateInputArgs) => async (dispatch: Dispatch) => {
+  (inputField: PostInputArgs) => async (dispatch: Dispatch) => {
     dispatch({
       type: POST_INPUT_REQUEST,
     });

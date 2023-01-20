@@ -1,6 +1,6 @@
 import { Button, Modal } from '@/components';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
-import { deleteInputAction } from '@/redux/input-state/inputActions';
+import { deleteInputAction } from '@/redux/state/input-state/inputActions';
 import React, { useEffect, useState } from 'react';
 
 export interface DeleteInputModalProps {

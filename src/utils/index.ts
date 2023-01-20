@@ -2,6 +2,7 @@ export * from './constants/time';
 export * from './constants/dropdownInputOptions';
 export * from './interfaces/dropdown-interfaces';
 export * from './interfaces/input-interfaces';
+export * from './interfaces/bookingLayoutInterfaces';
 export * from './enums/input-component';
 export * from './enums/route-urls';
 export * from './functions/getCurrentLanguage';

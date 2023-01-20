@@ -1,29 +1,28 @@
-import {
-  DropdownInput,
-  TextInput,
-  SwitchInput,
-  Button,
-  InputComponentHandler,
-  LoadingSpinner,
-  Icon,
-  NavLink,
-  Card,
-} from '@/components';
-import { dropdownInputOptions, GetInputArgs, RouteUrl } from '@/utils';
+import { Button, Icon, Card } from '@/components';
+import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
+import { getBookingLayoutAction } from '@/redux/state/booking-layout-state/bookingLayoutActions';
+import { AppState } from '@/redux/store';
+import { RouteUrl, useGetData } from '@/utils';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { DeleteInputModal } from './components/delete-input-modal/DeleteInputModal';
 
 export interface BookingLayoutsProps {}
 
 export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { bookingLayouts, isLoading, createBookingLayoutSuccess } = useSelector(
+    (state: AppState) => state.bookingLayouts
+  );
+  useGetData(getBookingLayoutAction(), createBookingLayoutSuccess);
 
   function navigateSettings() {
     navigate(`${RouteUrl.BookingLayouts}/${RouteUrl.InputSettings}`);
   }
+
+  console.log(bookingLayouts);
 
   return (
     <div className="grid gap-y-4 ">
