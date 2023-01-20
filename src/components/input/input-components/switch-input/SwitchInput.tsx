@@ -2,10 +2,11 @@ import React, { ChangeEvent, useState } from 'react';
 import { InputLabel } from '@/components';
 
 export interface SwitchInputProps {
-  onChange: (toggled: string) => void;
+  onChange: (date: string, componentType: string | null) => void;
   label?: string;
   required?: boolean;
   errorMessage?: string;
+  componentType?: string;
 }
 
 export const SwitchInput: React.FC<SwitchInputProps> = ({
@@ -13,12 +14,16 @@ export const SwitchInput: React.FC<SwitchInputProps> = ({
   label,
   required,
   errorMessage,
+  componentType,
 }) => {
   const [toggled, setToggled] = useState(false);
 
   function onToggle(event: ChangeEvent<HTMLInputElement>) {
     setToggled(!toggled);
-    onChange(String(event.target.checked));
+    onChange(
+      String(event.target.checked),
+      componentType ? componentType : null
+    );
   }
 
   return (

@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: 'filled' | 'outline' | 'text';
+  variant: 'filled' | 'outline' | 'text' | 'danger';
   size: 'small' | 'medium' | 'large';
   icon?: ReactNode;
   className?: string;
@@ -23,7 +23,22 @@ export const Button: React.FC<ButtonProps> = ({
     case 'filled':
       return (
         <button
-          className={`bg-sky-400 text-white py-2 w-full rounded-md font-medium ${
+          className={`bg-sky-400 text-white py-2 px-4 rounded-md font-medium ${
+            icon ? 'flex items-center' : ''
+          } ${className || ''}  ${
+            iconPosition === 'left' && icon ? 'flex-row' : 'flex-row-reverse'
+          } `}
+          type={type}
+          {...rest}
+        >
+          {icon}
+          {children}
+        </button>
+      );
+    case 'danger':
+      return (
+        <button
+          className={`bg-red-500 text-white py-2 w-full rounded-md font-medium ${
             icon ? 'flex items-center' : ''
           } ${className || ''}  ${
             iconPosition === 'left' && icon ? 'flex-row' : 'flex-row-reverse'

@@ -1,3 +1,3 @@
-export * from './admin/settings/Settings';
-export * from './admin/calendar/Calendar';
+export * from './admin/booking-layouts/BookingLayouts';
+export * from './admin/dashboard/Dashboard';
 export * from './admin/admin/Admin';

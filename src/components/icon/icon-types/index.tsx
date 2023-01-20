@@ -247,3 +247,67 @@ export const siteLogo = (
     ></path>
   </svg>
 );
+
+export const trash = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 48 48"
+  >
+    <g className="nc-icon-wrapper">
+      <path
+        d="M33.258,47H14.742a5.013,5.013,0,0,1-4.989-4.667L7.623,10h32.8L38.247,42.333A5.013,5.013,0,0,1,33.258,47Z"
+        fill="#363636"
+      ></path>
+      <path
+        d="M45,9H32V4a3,3,0,0,0-3-3H19a3,3,0,0,0-3,3V9H3a1,1,0,0,0,0,2H45a1,1,0,0,0,0-2ZM18,4a1,1,0,0,1,1-1H29a1,1,0,0,1,1,1V9H18Z"
+        fill="#636363"
+      ></path>
+      <path
+        d="M24.021,39a1,1,0,0,1-1-1V20a1,1,0,0,1,2,0V38A1,1,0,0,1,24.021,39Z"
+        fill="#636363"
+      ></path>
+      <path
+        d="M17,39a1,1,0,0,1-1-1V20a1,1,0,0,1,2,0V38A1,1,0,0,1,17,39Z"
+        fill="#636363"
+      ></path>
+      <path
+        d="M31,39a1,1,0,0,1-1-1V20a1,1,0,0,1,2,0V38A1,1,0,0,1,31,39Z"
+        fill="#636363"
+      ></path>
+    </g>
+  </svg>
+);
+
+export const close = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+  >
+    <g fill="none" className="nc-icon-wrapper">
+      <path
+        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+        fill="#212121"
+      ></path>
+    </g>
+  </svg>
+);
+
+export const dashboard = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+  >
+    <g fill="none" className="nc-icon-wrapper">
+      <path
+        d="M19 5v2h-4V5h4zM9 5v6H5V5h4zm10 8v6h-4v-6h4zM9 17v2H5v-2h4zM21 3h-8v6h8V3zM11 3H3v10h8V3zm10 8h-8v10h8V11zm-10 4H3v6h8v-6z"
+        fill="#212121"
+      ></path>
+    </g>
+  </svg>
+);

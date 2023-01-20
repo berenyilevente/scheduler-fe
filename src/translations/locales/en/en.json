@@ -1,0 +1,28 @@
+{
+  "bookingLayouts": {
+    "myLayouts": "My booking layouts",
+    "createField": {
+      "title": "Field settings",
+      "create": "Create field",
+      "created": "Created fields",
+      "label": "Select input label",
+      "type": "Select field type",
+      "noFieldsFound": "No fields found. Please create fields in the settings page."
+    }
+  },
+  "inputFields": {
+    "email_input": "Email",
+    "calendar_input": "Calendar",
+    "dropdown_input": "Dropdown",
+    "password_input": "Password",
+    "switch_input": "Switch",
+    "text_input": "Text",
+    "timepicker_input": "Time",
+    "phone_input": "Phone"
+  },
+  "components":{
+    "dropdown": {
+      "select": "Please select"
+    }
+  }
+}

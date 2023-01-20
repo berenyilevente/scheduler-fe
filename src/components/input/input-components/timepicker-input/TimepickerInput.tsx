@@ -3,10 +3,11 @@ import { timeValues } from '@/utils';
 import { Icon, InputLabel, InputError } from '@/components';
 
 export interface TimepickerInputProps {
-  onChange: (time: string) => void;
+  onChange: (time: string, componentType: string | null) => void;
   label?: string;
   required?: boolean;
   errorMessage?: string;
+  componentType?: string;
 }
 
 export const TimepickerInput: React.FC<TimepickerInputProps> = ({
@@ -14,6 +15,7 @@ export const TimepickerInput: React.FC<TimepickerInputProps> = ({
   label,
   required,
   errorMessage,
+  componentType,
 }) => {
   const [timeValue, setTimeValue] = useState<string>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,7 +23,7 @@ export const TimepickerInput: React.FC<TimepickerInputProps> = ({
 
   const onTimeClick = (time: string): void => {
     setIsOpen(false);
-    onChange(time);
+    onChange(time, componentType ? componentType : null);
     setTimeValue(time);
   };
 

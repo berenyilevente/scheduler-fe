@@ -1,21 +1,35 @@
 import { ChangeEvent, forwardRef, useState } from 'react';
 import { Icon, InputLabel, InputError } from '@/components';
+import { useInputValueHandler } from '@/utils';
 
 export interface EmailInputProps {
   className?: string;
   errorMessage?: string;
   label?: string;
   required?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: string, componentType: string | null) => void;
+  value: string | null;
+  componentType?: string;
 }
 
 export const EmailInput = forwardRef<HTMLInputElement, EmailInputProps>(
-  ({ onChange, className, errorMessage, label, required }, ref) => {
-    const [inputValue, setInputValue] = useState<string | null>(null);
+  (
+    {
+      onChange,
+      className,
+      errorMessage,
+      label,
+      required,
+      value,
+      componentType,
+    },
+    ref
+  ) => {
+    const { inputValue, setInputValue } = useInputValueHandler(value);
 
     const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
       setInputValue(event.target.value);
-      onChange(event.target.value);
+      onChange(event.target.value, componentType ? componentType : null);
     };
 
     const onError = (errorMessage?: string): string => {

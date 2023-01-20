@@ -7,9 +7,10 @@ import { Icon, InputLabel, InputError } from '@/components';
 
 export interface CalendarInputProps {
   label?: string;
-  onChange: (date: string) => void;
+  onChange: (date: string, componentType: string | null) => void;
   required?: boolean;
   errorMessage?: string;
+  componentType?: string;
 }
 
 export const CalendarInput: React.FC<CalendarInputProps> = ({
@@ -17,13 +18,14 @@ export const CalendarInput: React.FC<CalendarInputProps> = ({
   onChange,
   required,
   errorMessage,
+  componentType,
 }) => {
   const [selected, setSelected] = useState<Date>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleDropdown = () => setIsOpen((prevIsOpen) => !prevIsOpen);
 
   const onSelect = (date: Date): void => {
-    onChange(format(date, 'dd.MM.yyyy'));
+    onChange(format(date, 'dd.MM.yyyy'), componentType ? componentType : null);
     setSelected(date);
     setIsOpen(false);
   };
@@ -61,7 +63,7 @@ export const CalendarInput: React.FC<CalendarInputProps> = ({
           </span>
         </div>
         {isOpen && (
-          <div className="select-none bg-white w-min p-1 mt-2 rounded-md">
+          <div className="select-none absolute z-50 bg-white shadow-xl w-min p-1 mt-2 rounded-md">
             <DayPicker
               mode="single"
               selected={selected}

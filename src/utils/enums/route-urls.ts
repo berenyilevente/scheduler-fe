@@ -1,6 +1,7 @@
 export enum RouteUrl {
   Admin = '/admin',
-  Settings = '/settings',
-  Calendar = '/calendar',
+  BookingLayouts = '/booking-layouts',
+  Dashboard = '/dashboard',
   User = '/appointment/:id',
+  InputSettings = '/input-settings',
 }

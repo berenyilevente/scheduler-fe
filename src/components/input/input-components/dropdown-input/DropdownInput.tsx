@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DropdownOption } from '@/utils';
 import { Icon, InputLabel, InputError } from '@/components';
+import { getTranslation } from '@/utils';
+import i18n from '@/translations';
+import { useTranslation } from 'react-i18next';
+import { useInputValueHandler } from '@/utils';
 
 export interface DropdownProps {
-  options: DropdownOption[];
-  value: React.ReactNode;
+  options: string[];
+  value: string | null;
   onChange: (value: string) => void;
   label?: string;
   required?: boolean;
@@ -19,22 +23,42 @@ export const DropdownInput: React.FC<DropdownProps> = ({
   required,
   errorMessage,
 }) => {
+  const { t } = useTranslation();
+  const { inputValue, setInputValue } = useInputValueHandler(value);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [dropdownValue, setDropdownValue] = useState<DropdownOption>();
-  const toggleDropdown = () => setIsOpen((prevIsOpen) => !prevIsOpen);
 
-  const handleOptionClick = (option: DropdownOption): void => {
-    setDropdownValue(option);
-    onChange(option.value);
+  function toggleDropdown(): void {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  }
+
+  function handleOptionClick(option: string): void {
+    setInputValue(option);
+    onChange(option);
     setIsOpen(false);
-  };
+  }
 
-  const onError = (errorMessage?: string): string => {
+  function onError(errorMessage?: string): string {
     if (!errorMessage) {
       return '';
     }
     return 'border-red-500';
-  };
+  }
+
+  function getDropdownValue(dropdownValue: string | null): string | null {
+    if (dropdownValue === null) {
+      return null;
+    }
+
+    return getTranslation('inputFields', dropdownValue, i18n);
+  }
+
+  function DopdownValue(): JSX.Element {
+    if (inputValue === null) {
+      return <div>{t('components.dropdown.select')}</div>;
+    }
+
+    return <div>{getDropdownValue(inputValue)}</div>;
+  }
 
   return (
     <InputLabel label={label} required={required} errorMessage={errorMessage}>
@@ -49,7 +73,7 @@ export const DropdownInput: React.FC<DropdownProps> = ({
               )}`}
               id="options"
             >
-              {dropdownValue?.value || value || 'Please select'}
+              <DopdownValue />
               <Icon iconType="arrowDown" />
             </button>
           </span>
@@ -64,7 +88,7 @@ export const DropdownInput: React.FC<DropdownProps> = ({
                     onClick={() => handleOptionClick(option)}
                     className="cursor-pointer text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                   >
-                    {option.value}
+                    {getDropdownValue(option)}
                   </div>
                 ))}
               </div>

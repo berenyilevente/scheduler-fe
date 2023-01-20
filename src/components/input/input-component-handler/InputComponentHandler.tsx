@@ -8,33 +8,43 @@ import {
   TimepickerInput,
   PasswordInput,
   PhoneInput,
+  DropdownInput,
 } from '../input-components';
 
 export interface InputComponentHandlerProps {
-  component: string;
-  onChange: (value: string) => void;
+  componentType: string;
+  onChange: (value: string, componentType?: string | null) => void;
   label: string;
+  value: string;
   required: boolean;
 }
 
 export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
-  component,
+  componentType,
   onChange,
   label,
   required,
+  value,
 }) => {
-  const renderComponent = (component: string): JSX.Element => {
-    if (component === undefined) {
-      return <></>;
-    }
-    switch (component) {
+  const renderComponent = (componentType: string): JSX.Element => {
+    switch (componentType) {
       case InputComponent.Text:
         return (
-          <TextInput onChange={onChange} label={label} required={required} />
+          <TextInput
+            onChange={onChange}
+            label={label}
+            required={required}
+            value={value}
+          />
         );
       case InputComponent.Email:
         return (
-          <EmailInput onChange={onChange} label={label} required={required} />
+          <EmailInput
+            onChange={onChange}
+            label={label}
+            required={required}
+            value={value}
+          />
         );
       case InputComponent.Calendar:
         return (
@@ -62,16 +72,23 @@ export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
             onChange={onChange}
             label={label}
             required={required}
+            value={value}
           />
         );
       case InputComponent.Phone:
         return (
-          <PhoneInput onChange={onChange} label={label} required={required} />
+          <PhoneInput
+            onChange={onChange}
+            label={label}
+            required={required}
+            value={value}
+          />
         );
+
       default:
         return <div>No component found!</div>;
     }
   };
 
-  return renderComponent(component);
+  return renderComponent(componentType);
 };

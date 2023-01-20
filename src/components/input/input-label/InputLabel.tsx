@@ -16,7 +16,7 @@ export const InputLabel: React.FC<InputLabelProps> = ({
     required ? <span className="mt-1 px-1 text-red-500">*</span> : null;
 
   return (
-    <div className="mb-2">
+    <div className="mb-2 w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="mb-2 text-sm opacity-80">

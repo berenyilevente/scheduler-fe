@@ -1,29 +1,43 @@
-import { ChangeEvent, forwardRef, useState } from 'react';
+import { ChangeEvent, forwardRef, useEffect, useState } from 'react';
 import { InputLabel, InputError } from '@/components';
+import { useInputValueHandler } from '@/utils';
 
 export interface TextInputProps {
   className?: string;
   errorMessage?: string;
   label?: string;
   required?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: string, componentType: string | null) => void;
+  value: string | null;
+  componentType?: string;
 }
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ onChange, className, errorMessage, label, required }, ref) => {
-    const [inputValue, setInputValue] = useState<string | null>(null);
+  (
+    {
+      onChange,
+      className,
+      errorMessage,
+      label,
+      required,
+      value,
+      componentType,
+    },
+    ref
+  ) => {
+    const { inputValue, setInputValue } = useInputValueHandler(value);
 
     function onInputChange(event: ChangeEvent<HTMLInputElement>) {
       setInputValue(event.target.value);
-      onChange(event.target.value);
+      onChange(event.target.value, componentType ? componentType : null);
     }
 
-    const onError = (errorMessage?: string): string => {
+    function onError(errorMessage?: string): string {
       if (!errorMessage) {
         return '';
       }
       return 'border-red-500';
-    };
+    }
 
     return (
       <InputLabel label={label} required={required} errorMessage={errorMessage}>

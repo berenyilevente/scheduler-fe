@@ -10,3 +10,5 @@ export * from './navigation/Navigation';
 export * from './navigation/components/SideNavBar';
 export * from './navigation/components/TopNavBar';
 export * from './navigation/Navigation';
+export * from './modal/Modal';
+export * from './card/Card';

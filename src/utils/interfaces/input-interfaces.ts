@@ -8,12 +8,14 @@ export interface InputProps {
   timepicker: string;
 }
 
-export interface DropdownOption {
-  id?: string;
-  value: string;
+export interface CreateInputArgs {
+  inputType: string;
+  label: string;
+  required: boolean;
 }
 
-export interface InputArgs {
+export interface GetInputArgs {
+  _id: string;
   inputType: string;
   label: string;
   required: boolean;
