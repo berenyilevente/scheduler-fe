@@ -10,13 +10,16 @@ interface RefreshTypes {
 
 export function useGetData(
   action: (dispatch: Dispatch<AnyAction>) => void,
-  createSuccess?: boolean,
-  deleteSuccess?: boolean,
-  patchSuccess?: boolean
+  refresh: RefreshTypes
 ): void {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(action);
-  }, [dispatch, createSuccess, deleteSuccess, patchSuccess]);
+  }, [
+    dispatch,
+    refresh.createSuccess,
+    refresh.deleteSuccess,
+    refresh.patchSuccess,
+  ]);
 }

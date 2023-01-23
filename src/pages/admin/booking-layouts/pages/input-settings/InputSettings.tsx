@@ -18,7 +18,7 @@ import {
   postInputAction,
 } from '@/redux/state/input-state/inputActions';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
-import { DeleteInputModal } from '../../components/delete-input-modal/DeleteInputModal';
+import { DeleteModal } from '../../components/delete-modal/DeleteModal';
 import { useTranslation } from 'react-i18next';
 
 export interface InputSettingsPageProps {}
@@ -28,7 +28,10 @@ export const InputSettingsPage: React.FC<InputSettingsPageProps> = () => {
   const { inputFields, isLoading, createInputSuccess, deleteInputSuccess } =
     useSelector((state: AppState) => state.inputs);
 
-  useGetData(getInputAction(), createInputSuccess, deleteInputSuccess);
+  useGetData(getInputAction(), {
+    createSuccess: createInputSuccess,
+    deleteSuccess: deleteInputSuccess,
+  });
 
   const { t } = useTranslation();
   const [dropdownValue, setDropdownValue] = useState<string | null>(null);
@@ -104,8 +107,6 @@ export const InputSettingsPage: React.FC<InputSettingsPageProps> = () => {
     []
   );
 
-  console.log(fieldUpdates);
-
   return (
     <div className="grid gap-y-4 ">
       <div className="grid grid-cols-1 gap-y-5">
@@ -163,10 +164,11 @@ export const InputSettingsPage: React.FC<InputSettingsPageProps> = () => {
           </>
         </LoadingSpinner>
       </div>
-      <DeleteInputModal
+      <DeleteModal
         showModal={showModal}
         onClose={() => setshowModal(false)}
         onDelete={onDelete}
+        title={'Are you sure you want to delte this input?'}
       />
     </div>
   );

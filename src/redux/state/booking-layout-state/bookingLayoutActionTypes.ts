@@ -41,10 +41,41 @@ export interface PostBookingLayoutRequest {
 }
 export interface PostBookingLayoutSuccess {
   type: typeof POST_BOOKING_LAYOUT_SUCCESS;
-  payload: PostBookingLayoutArgs;
 }
 export interface PostBookingLayoutFailure {
   type: typeof POST_BOOKING_LAYOUT_FAILURE;
+  error: string;
+}
+
+export const DELTE_INPUT_FROM_BOOKING_LAYOUT_REQUEST =
+  'DELTE_INPUT_FROM_BOOKING_LAYOUT_REQUEST';
+export const DELTE_INPUT_FROM_BOOKING_LAYOUT_SUCCESS =
+  'DELTE_INPUT_FROM_BOOKING_LAYOUT_SUCCESS';
+export const DELTE_INPUT_FROM_BOOKING_LAYOUT_FAILURE =
+  'DELTE_INPUT_FROM_BOOKING_LAYOUT_FAILURE';
+export interface DeleteInputFromBookingLayoutRequest {
+  type: typeof DELTE_INPUT_FROM_BOOKING_LAYOUT_REQUEST;
+}
+export interface DeleteInputFromBookingLayoutSuccess {
+  type: typeof DELTE_INPUT_FROM_BOOKING_LAYOUT_SUCCESS;
+  payload: { bookingLayoutId: string; inputId: string };
+}
+export interface DeleteInputFromBookingLayoutFailure {
+  type: typeof DELTE_INPUT_FROM_BOOKING_LAYOUT_FAILURE;
+  error: string;
+}
+
+export const DELETE_BOOKING_LAYOUT_REQUEST = 'DELETE_BOOKING_LAYOUT_REQUEST';
+export const DELETE_BOOKING_LAYOUT_SUCCESS = 'DELETE_BOOKING_LAYOUT_SUCCESS';
+export const DELETE_BOOKING_LAYOUT_FAILURE = 'DELETE_BOOKING_LAYOUT_FAILURE';
+export interface DeleteBookingLayoutRequest {
+  type: typeof DELETE_BOOKING_LAYOUT_REQUEST;
+}
+export interface DeleteBookingLayoutSuccess {
+  type: typeof DELETE_BOOKING_LAYOUT_SUCCESS;
+}
+export interface DeleteBookingLayoutFailure {
+  type: typeof DELETE_BOOKING_LAYOUT_FAILURE;
   error: string;
 }
 
@@ -57,4 +88,10 @@ export type BookingLayoutActionTypes =
   | GetBookingLayoutByIdSuccess
   | PostBookingLayoutRequest
   | PostBookingLayoutFailure
-  | PostBookingLayoutSuccess;
+  | PostBookingLayoutSuccess
+  | DeleteInputFromBookingLayoutRequest
+  | DeleteInputFromBookingLayoutFailure
+  | DeleteInputFromBookingLayoutSuccess
+  | DeleteBookingLayoutRequest
+  | DeleteBookingLayoutFailure
+  | DeleteBookingLayoutSuccess;

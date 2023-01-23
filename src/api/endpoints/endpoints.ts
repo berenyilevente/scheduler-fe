@@ -34,8 +34,6 @@ export const getBookingLayoutEndpoint = async (): Promise<
 export const getBookingLayoutByIdEndpoint = async (
   id: string
 ): Promise<GetBookingLayoutArgs> => {
-  console.log(id);
-
   const response = await axiosInstance.get(
     `${ApiUrl.GetBookingLayoutById}/${id}`
   );
@@ -50,4 +48,20 @@ export const postBookingLayoutEndpoint = async (
     bookingLayout
   );
   return response.data.data;
+};
+
+export const deleteInputFromBookingLayoutEndpoint = async (
+  bookingLayoutId: string,
+  inputId: string
+): Promise<void> => {
+  await axiosInstance.post(ApiUrl.deleteInputFromBookingLayout, {
+    bookingLayoutId,
+    inputId,
+  });
+};
+
+export const deleteBookingLayoutEndpoint = async (
+  id: string
+): Promise<void> => {
+  await axiosInstance.delete(`${ApiUrl.deleteBookingLayout}/${id}`);
 };
