@@ -1,11 +1,12 @@
 import { GetInputArgs, PostInputArgs } from './input-interfaces';
 
 export interface GetBookingLayoutArgs {
-  inputs: GetInputArgs;
+  _id: string;
+  inputs: GetInputArgs[];
   name: string;
 }
 
 export interface PostBookingLayoutArgs {
-  inputs: PostInputArgs;
+  inputs: PostInputArgs[];
   name: string;
 }

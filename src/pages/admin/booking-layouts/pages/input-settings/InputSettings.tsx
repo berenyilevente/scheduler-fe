@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 
 export interface InputSettingsPageProps {}
 
-const InputSettingsPage: React.FC<InputSettingsPageProps> = () => {
+export const InputSettingsPage: React.FC<InputSettingsPageProps> = () => {
   const dispatch = useAppDispatch();
   const { inputFields, isLoading, createInputSuccess, deleteInputSuccess } =
     useSelector((state: AppState) => state.inputs);
@@ -171,4 +171,3 @@ const InputSettingsPage: React.FC<InputSettingsPageProps> = () => {
     </div>
   );
 };
-export default InputSettingsPage;

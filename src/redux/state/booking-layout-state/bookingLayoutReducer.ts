@@ -1,6 +1,9 @@
 import { GetBookingLayoutArgs, PostBookingLayoutArgs } from '@/utils';
 import {
   BookingLayoutActionTypes,
+  GET_BOOKING_LAYOUT_BY_ID_FAILURE,
+  GET_BOOKING_LAYOUT_BY_ID_REQUEST,
+  GET_BOOKING_LAYOUT_BY_ID_SUCCESS,
   GET_BOOKING_LAYOUT_FAILURE,
   GET_BOOKING_LAYOUT_REQUEST,
   GET_BOOKING_LAYOUT_SUCCESS,
@@ -47,6 +50,27 @@ const BookingLayoutReducer = (
         isLoading: false,
         error: action.error,
       };
+
+    case GET_BOOKING_LAYOUT_BY_ID_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case GET_BOOKING_LAYOUT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        bookingLayout: action.payload,
+        error: null,
+      };
+    case GET_BOOKING_LAYOUT_BY_ID_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
+      };
+
     case POST_BOOKING_LAYOUT_REQUEST:
       return {
         ...state,
@@ -69,6 +93,7 @@ const BookingLayoutReducer = (
         createBookingLayoutSuccess: false,
         error: action.error,
       };
+
     default:
       return state;
   }

@@ -18,32 +18,47 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
   );
   useGetData(getBookingLayoutAction(), createBookingLayoutSuccess);
 
-  function navigateSettings() {
-    navigate(`${RouteUrl.BookingLayouts}/${RouteUrl.InputSettings}`);
+  function navigateBookingLayoutInfo(id: string): void {
+    navigate(`${RouteUrl.BookingLayouts}${RouteUrl.EditBookingLayout}${id}`);
   }
 
-  console.log(bookingLayouts);
+  function navigateCreateBookingLayout(): void {
+    navigate(`${RouteUrl.BookingLayouts}${RouteUrl.CreateBookingLayout}`);
+  }
 
   return (
     <div className="grid gap-y-4 ">
       <div className="flex justify-between">
         <h2 className="text-2xl font-bold">{t('bookingLayouts.myLayouts')}</h2>
-        <Button variant="filled" size="medium">
+        <Button
+          variant="filled"
+          size="medium"
+          onClick={navigateCreateBookingLayout}
+        >
           Create layout
         </Button>
       </div>
-      <Card>
-        <div className="grid gap-y-3 p-4">
-          <div className="flex justify-between">
-            <p className="text-xl font-semibold">Test booking layout</p>
-            <Icon iconType="settings" onClick={navigateSettings}></Icon>
-          </div>
-          <div>
-            <p>Info 1</p>
-            <p>Info 1</p>
-          </div>
-        </div>
-      </Card>
+      {bookingLayouts.length ? (
+        bookingLayouts.map((bookingLayout) => (
+          <Card key={bookingLayout._id}>
+            <div className="grid gap-y-3 p-4">
+              <div className="flex justify-between">
+                <p className="text-xl font-semibold">{bookingLayout.name}</p>
+                <Icon
+                  iconType="settings"
+                  onClick={() => navigateBookingLayoutInfo(bookingLayout._id)}
+                ></Icon>
+              </div>
+              <div className="flex gap-1">
+                Number of input fields:
+                <p className="font-bold">{bookingLayout.inputs.length}</p>
+              </div>
+            </div>
+          </Card>
+        ))
+      ) : (
+        <div>No booking layouts</div>
+      )}
     </div>
   );
 };

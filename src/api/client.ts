@@ -4,6 +4,7 @@ import {
   deleteInputEndpoint,
   getBookingLayoutEndpoint,
   postBookingLayoutEndpoint,
+  getBookingLayoutByIdEndpoint,
 } from './endpoints/endpoints';
 
 class Client {
@@ -11,6 +12,7 @@ class Client {
   postInput = postInputEndpoint;
   deleteInput = deleteInputEndpoint;
   getBookingLayout = getBookingLayoutEndpoint;
+  getBookingLayoutById = getBookingLayoutByIdEndpoint;
   postBookingLayout = postBookingLayoutEndpoint;
 }
 

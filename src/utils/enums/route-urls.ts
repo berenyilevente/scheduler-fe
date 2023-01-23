@@ -5,4 +5,6 @@ export enum RouteUrl {
   BookingLayouts = '/booking-layouts',
   InputSettings = '/input-settings',
   User = '/appointment/:id',
+  CreateBookingLayout = '/create-booking-layout',
+  EditBookingLayout = '/edit-booking-layout/:id',
 }
