@@ -18,17 +18,13 @@ const EditBookingLayout: React.FC<EditBookingLayoutProps> = () => {
   const dispatch = useAppDispatch();
 
   const bookingLayoutId: string = id!.slice(3);
-  const {
-    bookingLayout,
-    isLoading,
-    createBookingLayoutSuccess,
-    deleteInputSuccess,
-  } = useSelector((state: AppState) => state.bookingLayouts);
+  const { bookingLayout, isLoading, createSuccess, deleteSuccess } =
+    useSelector((state: AppState) => state.bookingLayouts);
   const [showModal, setshowModal] = useState<boolean>(false);
   const [inputId, setInputId] = useState<string | null>(null);
 
   useGetData(getBookingLayoutByIdAction(bookingLayoutId), {
-    deleteSuccess: deleteInputSuccess,
+    deleteSuccess,
   });
 
   function openDeleteModal(inputId: string): void {

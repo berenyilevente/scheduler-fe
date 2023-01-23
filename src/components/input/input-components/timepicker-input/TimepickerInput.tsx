@@ -58,24 +58,25 @@ export const TimepickerInput: React.FC<TimepickerInputProps> = ({
             </button>
           </span>
         </div>
-      </div>
-      {isOpen && (
-        <div className="h-96 w-min overflow-y-auto absolute left-5 mt-2  rounded-md shadow-lg select-none">
-          <div className="rounded-md bg-white shadow-xs pr-8">
-            <div className="py-1 flex flex-col  " role="menu">
-              {timeValues.map((time, index) => (
-                <div
-                  key={index}
-                  onClick={() => onTimeClick(time)}
-                  className="max-h-96 overflow-y-auto cursor-pointer text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
-                >
-                  {time}
-                </div>
-              ))}
+        {isOpen && (
+          <div className="h-96 w-min overflow-y-auto absolute left-5 mt-2  rounded-md shadow-lg select-none z-50">
+            <div className="rounded-md bg-white shadow-xs pr-8">
+              <div className="py-1 flex flex-col  " role="menu">
+                {timeValues.map((time, index) => (
+                  <div
+                    key={index}
+                    onClick={() => onTimeClick(time)}
+                    className="max-h-96 overflow-y-auto cursor-pointer text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                  >
+                    {time}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
       <InputError errorMessage={errorMessage} />
     </InputLabel>
   );

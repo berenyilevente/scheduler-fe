@@ -23,18 +23,18 @@ export interface IDefaultBookingLayoutState {
   bookingLayouts: GetBookingLayoutArgs[];
   bookingLayout: GetBookingLayoutArgs | undefined;
   error: string | null;
-  createBookingLayoutSuccess: boolean;
-  deleteInputSuccess: boolean;
-  deleteBookingLayoutSuccess: boolean;
+  createSuccess: boolean;
+  deleteSuccess: boolean;
+  patchSuccess: boolean;
 }
 const defaultBookingLayoutState: IDefaultBookingLayoutState = {
   isLoading: false,
   error: null,
   bookingLayouts: [],
   bookingLayout: undefined,
-  createBookingLayoutSuccess: false,
-  deleteInputSuccess: false,
-  deleteBookingLayoutSuccess: false,
+  createSuccess: false,
+  deleteSuccess: false,
+  patchSuccess: false,
 };
 const BookingLayoutReducer = (
   state = defaultBookingLayoutState,
@@ -84,7 +84,7 @@ const BookingLayoutReducer = (
     case POST_BOOKING_LAYOUT_REQUEST:
       return {
         ...state,
-        createBookingLayoutSuccess: false,
+        createSuccess: false,
         isLoading: true,
         error: null,
       };
@@ -92,21 +92,21 @@ const BookingLayoutReducer = (
       return {
         ...state,
         isLoading: false,
-        createBookingLayoutSuccess: true,
+        createSuccess: true,
         error: null,
       };
     case POST_BOOKING_LAYOUT_FAILURE:
       return {
         ...state,
         isLoading: false,
-        createBookingLayoutSuccess: false,
+        createSuccess: false,
         error: action.error,
       };
 
     case DELTE_INPUT_FROM_BOOKING_LAYOUT_REQUEST:
       return {
         ...state,
-        deleteInputSuccess: false,
+        deleteSuccess: false,
         isLoading: true,
         error: null,
       };
@@ -114,21 +114,21 @@ const BookingLayoutReducer = (
       return {
         ...state,
         isLoading: false,
-        deleteInputSuccess: true,
+        deleteSuccess: true,
         error: null,
       };
     case DELTE_INPUT_FROM_BOOKING_LAYOUT_FAILURE:
       return {
         ...state,
         isLoading: false,
-        deleteInputSuccess: false,
+        deleteSuccess: false,
         error: action.error,
       };
 
     case DELETE_BOOKING_LAYOUT_REQUEST:
       return {
         ...state,
-        deleteBookingLayoutSuccess: false,
+        deleteSuccess: false,
         isLoading: true,
         error: null,
       };
@@ -136,14 +136,14 @@ const BookingLayoutReducer = (
       return {
         ...state,
         isLoading: false,
-        deleteBookingLayoutSuccess: true,
+        deleteSuccess: true,
         error: null,
       };
     case DELETE_BOOKING_LAYOUT_FAILURE:
       return {
         ...state,
         isLoading: false,
-        deleteBookingLayoutSuccess: false,
+        deleteSuccess: false,
         error: action.error,
       };
 

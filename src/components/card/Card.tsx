@@ -1,8 +1,14 @@
 import { FC, PropsWithChildren } from 'react';
 
-export const Card: FC<PropsWithChildren> = ({ children }) => {
+interface CardProps extends PropsWithChildren {
+  className?: string;
+}
+
+export const Card: FC<CardProps> = ({ children, className }) => {
   return (
-    <div className="bg-white-100 shadow-lg rounded-lg h-min w-[32em]">
+    <div
+      className={`bg-white-100 shadow-lg rounded-lg h-min w-full p-4 ${className}`}
+    >
       {children}
     </div>
   );

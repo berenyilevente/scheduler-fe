@@ -25,6 +25,7 @@ export const RootRouter: React.FC<RootRouterProps> = () => {
         path={`${RouteUrl.BookingLayouts}${RouteUrl.EditBookingLayout}`}
         element={<EditBookingLayout />}
       />
+      <Route path={RouteUrl.BookingLayoutById} element={<BookingLayouts />} />
     </Routes>
   );
 };

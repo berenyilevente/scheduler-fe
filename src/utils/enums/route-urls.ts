@@ -7,4 +7,5 @@ export enum RouteUrl {
   User = '/appointment/:id',
   CreateBookingLayout = '/create-booking-layout',
   EditBookingLayout = '/edit-booking-layout/:id',
+  BookingLayoutById = '/booking-layout/:id',
 }

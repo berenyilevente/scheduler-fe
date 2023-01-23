@@ -258,7 +258,7 @@ export const trash = (
     <g className="nc-icon-wrapper">
       <path
         d="M33.258,47H14.742a5.013,5.013,0,0,1-4.989-4.667L7.623,10h32.8L38.247,42.333A5.013,5.013,0,0,1,33.258,47Z"
-        fill="#363636"
+        fill="currentColor"
       ></path>
       <path
         d="M45,9H32V4a3,3,0,0,0-3-3H19a3,3,0,0,0-3,3V9H3a1,1,0,0,0,0,2H45a1,1,0,0,0,0-2ZM18,4a1,1,0,0,1,1-1H29a1,1,0,0,1,1,1V9H18Z"
@@ -290,7 +290,7 @@ export const close = (
     <g fill="none" className="nc-icon-wrapper">
       <path
         d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-        fill="#212121"
+        fill="currentColor"
       ></path>
     </g>
   </svg>
@@ -306,7 +306,77 @@ export const dashboard = (
     <g fill="none" className="nc-icon-wrapper">
       <path
         d="M19 5v2h-4V5h4zM9 5v6H5V5h4zm10 8v6h-4v-6h4zM9 17v2H5v-2h4zM21 3h-8v6h8V3zM11 3H3v10h8V3zm10 8h-8v10h8V11zm-10 4H3v6h8v-6z"
+        fill="currentColor"
+      ></path>
+    </g>
+  </svg>
+);
+
+export const plus = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <g fill="none" className="nc-icon-wrapper">
+      <path
+        d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+        fill="currentColor"
+      ></path>
+    </g>
+  </svg>
+);
+
+export const layout = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+  >
+    <g className="nc-icon-wrapper">
+      <path
+        d="M44,3H4A3,3,0,0,0,1,6V8H47V6A3,3,0,0,0,44,3Z"
+        fill="#e3e3e3"
+      ></path>
+      <rect x="1" y="8" width="46" height="12" fill="#3aace9"></rect>
+      <path d="M16,20V45H44a3,3,0,0,0,3-3V20Z" fill="#e3e3e3"></path>
+      <path d="M1,20V42a3,3,0,0,0,3,3H16V20Z" fill="#363636"></path>
+      <circle cx="8" cy="14" r="3" fill="#fff"></circle>
+      <path d="M42,15H38a1,1,0,0,1,0-2h4a1,1,0,0,1,0,2Z" fill="#fff"></path>
+      <path d="M33,15H24a1,1,0,0,1,0-2h9a1,1,0,0,1,0,2Z" fill="#fff"></path>
+      <path
+        d="M28.905,36H21.1A1.1,1.1,0,0,1,20,34.905V25.1A1.1,1.1,0,0,1,21.1,24h7.81A1.1,1.1,0,0,1,30,25.1v9.81A1.1,1.1,0,0,1,28.905,36Z"
+        fill="#aeaeae"
+      ></path>
+      <path d="M42,26H34a1,1,0,0,1,0-2h8a1,1,0,0,1,0,2Z" fill="#aeaeae"></path>
+      <path d="M42,31H34a1,1,0,0,1,0-2h8a1,1,0,0,1,0,2Z" fill="#aeaeae"></path>
+      <path d="M42,36H34a1,1,0,0,1,0-2h8a1,1,0,0,1,0,2Z" fill="#aeaeae"></path>
+      <path d="M42,41H21a1,1,0,0,1,0-2H42a1,1,0,0,1,0,2Z" fill="#aeaeae"></path>
+    </g>
+  </svg>
+);
+
+export const list = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 64 64"
+  >
+    <g className="nc-icon-wrapper" fill="#212121">
+      <path
+        data-color="color-2"
+        d="M60,34H4c-0.552,0-1-0.448-1-1v-2c0-0.552,0.448-1,1-1h56c0.552,0,1,0.448,1,1v2 C61,33.552,60.552,34,60,34z"
+      ></path>{' '}
+      <path
         fill="#212121"
+        d="M60,16H31c-0.552,0-1-0.448-1-1v-2c0-0.552,0.448-1,1-1h29c0.552,0,1,0.448,1,1v2C61,15.552,60.552,16,60,16 z"
+      ></path>{' '}
+      <path
+        fill="#212121"
+        d="M33,52H4c-0.552,0-1-0.448-1-1v-2c0-0.552,0.448-1,1-1h29c0.552,0,1,0.448,1,1v2C34,51.552,33.552,52,33,52z "
       ></path>
     </g>
   </svg>

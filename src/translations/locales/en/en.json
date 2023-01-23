@@ -1,6 +1,8 @@
 {
   "bookingLayouts": {
     "myLayouts": "My booking layouts",
+    "description": "These are your booking layouts. Booking layouts are used to show you a preview about a specific booking that is going to be presented to your users. Also, you can add new, edit and customize existing layouts.",
+    "noResult": "You don´t have any booking layouts yet. Create one now!",
     "createField": {
       "title": "Field settings",
       "create": "Create field",
