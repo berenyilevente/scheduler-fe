@@ -16,7 +16,10 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
 }) => {
   return (
     <Modal showModal={showModal} closeModal={onClose} title={title}>
-      <div className="px-12 py-4">
+      <div className="flex justify-around px-12 py-4">
+        <Button variant="outline" size="medium" onClick={onClose}>
+          Cancel
+        </Button>
         <Button variant="danger" size="medium" onClick={onDelete}>
           Delete
         </Button>

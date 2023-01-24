@@ -1,4 +1,9 @@
-import { Icon, InputComponentHandler, LoadingSpinner } from '@/components';
+import {
+  Button,
+  Icon,
+  InputComponentHandler,
+  LoadingSpinner,
+} from '@/components';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import {
   deleteInputFromBookingLayoutAction,
@@ -6,9 +11,9 @@ import {
 } from '@/redux/state/booking-layout-state/bookingLayoutActions';
 import { AppState } from '@/redux/store';
 import { GetInputArgs, useGetData } from '@/utils';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { DeleteModal } from '../../components/delete-modal/DeleteModal';
 
 export interface EditBookingLayoutProps {}
@@ -16,12 +21,14 @@ export interface EditBookingLayoutProps {}
 const EditBookingLayout: React.FC<EditBookingLayoutProps> = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const bookingLayoutId: string = id!.slice(3);
-  const { bookingLayout, isLoading, createSuccess, deleteSuccess } =
-    useSelector((state: AppState) => state.bookingLayouts);
+  const { bookingLayout, isLoading, deleteSuccess } = useSelector(
+    (state: AppState) => state.bookingLayouts
+  );
   const [showModal, setshowModal] = useState<boolean>(false);
   const [inputId, setInputId] = useState<string | null>(null);
+  const [inputFields, setInputFields] = useState<GetInputArgs[]>([]);
 
   useGetData(getBookingLayoutByIdAction(bookingLayoutId), {
     deleteSuccess,
@@ -41,6 +48,20 @@ const EditBookingLayout: React.FC<EditBookingLayoutProps> = () => {
     dispatch(deleteInputFromBookingLayoutAction(bookingLayoutId, inputId));
   }
 
+  function removeInput(field: GetInputArgs): void {
+    const newInputFields = [...inputFields].filter(
+      (inputField) => inputField !== field
+    );
+    setInputFields(newInputFields);
+  }
+
+  useEffect(() => {
+    if (bookingLayout === undefined) {
+      return;
+    }
+    setInputFields(bookingLayout.inputs);
+  }, [bookingLayoutId]);
+
   return (
     <div>
       {bookingLayout !== undefined ? (
@@ -48,28 +69,47 @@ const EditBookingLayout: React.FC<EditBookingLayoutProps> = () => {
           <p className="text-2xl pb-4">{bookingLayout.name}</p>
           <LoadingSpinner isLoading={isLoading} size="small">
             <>
-              {bookingLayout.inputs.length &&
-                bookingLayout.inputs.map(
-                  (data: GetInputArgs, index: number) => (
-                    <div
-                      key={index}
-                      className="flex justify-between gap-4 items-center"
-                    >
-                      <InputComponentHandler
-                        componentType={data.inputType}
-                        onChange={(value) => console.log(value)}
-                        label={data.label}
-                        required={data.required}
-                        value=""
-                      />
-                      <Icon
-                        iconType="trash"
-                        className="pt-4"
-                        onClick={() => openDeleteModal(data._id)}
-                      />
-                    </div>
-                  )
-                )}
+              {inputFields.length &&
+                inputFields.map((inputField: GetInputArgs, index: number) => (
+                  <div
+                    key={index}
+                    className="flex justify-between gap-4 items-center"
+                  >
+                    <InputComponentHandler
+                      componentType={inputField.inputType}
+                      onChange={(value) => console.log(value)}
+                      label={inputField.label}
+                      required={inputField.required}
+                      value=""
+                    />
+                    <Icon
+                      iconType="trash"
+                      className="pt-4"
+                      onClick={() => removeInput(inputField)}
+                    />
+                  </div>
+                ))}
+              <div className="flex justify-between mt-4">
+                <div className="flex gap-4">
+                  <Button
+                    size="medium"
+                    variant="outline"
+                    onClick={() => navigate(-1)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button size="medium" variant="filled">
+                    Save
+                  </Button>
+                </div>
+                <Button
+                  variant="outline"
+                  size="small"
+                  onClick={() => setInputFields(bookingLayout.inputs)}
+                >
+                  Reset
+                </Button>
+              </div>
             </>
           </LoadingSpinner>
         </>

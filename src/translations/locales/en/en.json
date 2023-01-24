@@ -5,11 +5,14 @@
     "noResult": "You don´t have any booking layouts yet. Create one now!",
     "createField": {
       "title": "Field settings",
-      "create": "Create field",
-      "created": "Created fields",
+      "add": "Add field",
+      "preview": "Booking layout preview",
       "label": "Select input label",
       "type": "Select field type",
       "noFieldsFound": "No fields found. Please create fields in the settings page."
+    },
+    "createBookingLayout": {
+      "description": "This is your layout creator. Here your can create a new booking layout by providing the desired input fields you would like to have included. Specify a layout name and the input fields you would like to have included with that layout. This can be changed later."
     }
   },
   "inputFields": {

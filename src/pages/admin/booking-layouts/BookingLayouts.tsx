@@ -7,12 +7,17 @@ import {
 } from '@/redux/state/booking-layout-state/bookingLayoutActions';
 import { AppState } from '@/redux/store';
 import i18n from '@/translations';
-import { getTranslation, RouteUrl, useGetData } from '@/utils';
-import { useState } from 'react';
+import {
+  GetBookingLayoutArgs,
+  GetInputArgs,
+  getTranslation,
+  RouteUrl,
+  useGetData,
+} from '@/utils';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { BookingLayoutNavigation } from './components/booking-layout-navigation/BookingLayoutNavigation';
 import { DeleteModal } from './components/delete-modal/DeleteModal';
 
 export interface BookingLayoutsProps {}
@@ -22,7 +27,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const selectedBookingLayoutId = id?.slice(3);
+  const urlBookingLayoutId = id?.slice(3);
   const { bookingLayouts, isLoading, createSuccess, deleteSuccess } =
     useSelector((state: AppState) => state.bookingLayouts);
 
@@ -33,10 +38,9 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
 
   const [showModal, setshowModal] = useState<boolean>(false);
   const [bookingLayoutId, setBookingLayoutId] = useState<string | null>(null);
-
-  function navigateBookingLayoutInfo(id: string): void {
-    navigate(`${RouteUrl.BookingLayouts}${RouteUrl.EditBookingLayout}${id}`);
-  }
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [editInputFields, setEditInputFields] =
+    useState<GetInputArgs[] | null>(null);
 
   function navigateCreateBookingLayout(): void {
     navigate(`${RouteUrl.BookingLayouts}${RouteUrl.CreateBookingLayout}`);
@@ -56,6 +60,74 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     dispatch(deleteBookingLayoutAction(bookingLayoutId));
   }
 
+  function onRemoveInput(field: GetInputArgs): void {
+    if (editInputFields === null) {
+      return;
+    }
+    const newInputFields = [...editInputFields].filter(
+      (inputField) => inputField !== field
+    );
+    setEditInputFields(newInputFields);
+  }
+
+  function getUnderLine(id: string): string {
+    if (urlBookingLayoutId === id) {
+      return ' border-b border-b-sky-500';
+    }
+    return '';
+  }
+
+  function onEditClick(): void {
+    setIsEdit(!isEdit);
+  }
+
+  function navigateTo(routeUrl: string): void {
+    setEditInputFields(null);
+    setIsEdit(false);
+    navigate(routeUrl);
+  }
+
+  function onResetValues(): void {
+    if (bookingLayouts === undefined || bookingLayouts.length === undefined) {
+      return;
+    }
+
+    for (let i = 0; i < bookingLayouts.length; i++) {
+      const bookingLayout: GetBookingLayoutArgs = bookingLayouts[i];
+
+      if (bookingLayout._id === urlBookingLayoutId) {
+        setEditInputFields(bookingLayout.inputs);
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (urlBookingLayoutId !== undefined) {
+      return;
+    }
+
+    navigate(`${RouteUrl.BookingLayoutById}${bookingLayouts[0]._id}`);
+  }, []);
+
+  useEffect(() => {
+    if (isEdit === false) {
+      setEditInputFields(null);
+      return;
+    }
+
+    if (bookingLayouts === undefined || bookingLayouts.length === undefined) {
+      return;
+    }
+
+    for (let i = 0; i < bookingLayouts.length; i++) {
+      const bookingLayout: GetBookingLayoutArgs = bookingLayouts[i];
+
+      if (bookingLayout._id === urlBookingLayoutId) {
+        setEditInputFields(bookingLayout.inputs);
+      }
+    }
+  }, [isEdit, deleteSuccess]);
+
   return (
     <div className="grid gap-y-4 ">
       <div className="flex justify-between">
@@ -65,6 +137,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
           size="medium"
           onClick={navigateCreateBookingLayout}
           iconType="plus"
+          iconColor="text-sky-500"
           iconPosition="left"
         >
           Create layout
@@ -83,17 +156,19 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
         <div className="flex gap-4 items-center w-min whitespace-nowrap p-2">
           {bookingLayouts.length !== undefined ? (
             bookingLayouts.map((bookingLayout) => (
-              <Link
+              <div
                 key={bookingLayout._id}
-                to={`${RouteUrl.BookingLayoutById}${bookingLayout._id}`}
-                className={`w-full flex justify-start gap-x-4 items-center py-2 px-4 ${
-                  selectedBookingLayoutId === bookingLayout._id
-                    ? 'border-b border-b-sky-500'
-                    : ''
-                }`}
+                onClick={() =>
+                  navigateTo(
+                    `${RouteUrl.BookingLayoutById}${bookingLayout._id}`
+                  )
+                }
+                className={`w-full hover:cursor-pointer flex justify-start gap-x-4 items-center py-2 px-4 ${getUnderLine(
+                  bookingLayout._id
+                )}`}
               >
                 <div>{bookingLayout.name}</div>
-              </Link>
+              </div>
             ))
           ) : (
             <></>
@@ -106,50 +181,91 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
           {bookingLayouts !== undefined ? (
             bookingLayouts.map(
               (bookingLayout) =>
-                bookingLayout._id === selectedBookingLayoutId && (
+                bookingLayout._id === urlBookingLayoutId && (
                   <Card key={bookingLayout._id}>
                     <div className="grid gap-y-3 p-4">
                       <div className="flex justify-between">
                         <p className="text-xl font-semibold">
                           {bookingLayout.name}
                         </p>
-                        <div className="flex gap-2">
-                          <Icon
-                            iconType="settings"
+                        <div className="flex gap-3 items-center">
+                          <Button
+                            variant="outline"
+                            size="medium"
+                            iconType={`${isEdit ? 'refresh' : 'settings'}`}
                             onClick={() =>
-                              navigateBookingLayoutInfo(bookingLayout._id)
+                              isEdit === false ? onEditClick() : onResetValues()
                             }
-                          />
-                          <Icon
+                          >
+                            {isEdit ? 'Reset' : 'Edit'}
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="medium"
                             iconType="trash"
+                            className="text-black"
                             onClick={() => openDeleteModal(bookingLayout._id)}
-                          />
+                          >
+                            Delete
+                          </Button>
                         </div>
                       </div>
                     </div>
                     <div className="p-4">
                       {bookingLayout.inputs.length !== undefined ? (
-                        bookingLayout.inputs.map((input) => (
-                          <div
-                            key={input._id}
-                            className="flex items-center gap-6 border border-slate-100 p-4 rounded-md my-4"
-                          >
-                            <Icon iconType="list" />
-                            <div>
-                              <p className="font-semibold">
-                                {getTranslation(
-                                  'inputFields',
-                                  input.inputType,
-                                  i18n
-                                )}
-                              </p>
+                        (editInputFields || bookingLayout.inputs).map(
+                          (inputField) => (
+                            <div
+                              key={inputField._id}
+                              className={`${
+                                isEdit && 'animate-shake hover:cursor-pointer'
+                              }  flex justify-between border border-slate-100 p-4 rounded-md my-4`}
+                            >
+                              <div className="flex items-center gap-6">
+                                <Icon iconType="list" />
+                                <div>
+                                  <p className="font-semibold">
+                                    {getTranslation(
+                                      'inputFields',
+                                      inputField.inputType,
+                                      i18n
+                                    )}
+                                  </p>
+                                  <p className="text-sm">
+                                    {'label: ' + inputField.label}
+                                  </p>
+                                </div>
+                              </div>
+                              {isEdit && (
+                                <div className="flex gap-x-3 items-center">
+                                  <Icon iconType="edit" />
+                                  <Icon
+                                    iconType="remove"
+                                    onClick={() => onRemoveInput(inputField)}
+                                  />
+                                </div>
+                              )}
                             </div>
-                          </div>
-                        ))
+                          )
+                        )
                       ) : (
                         <></>
                       )}
                     </div>
+                    {isEdit && (
+                      <div className="flex justify-end gap-4 px-4">
+                        <Button
+                          size="medium"
+                          variant="outline"
+                          onClick={() => setIsEdit(false)}
+                        >
+                          Cancel
+                        </Button>
+                        <Button size="medium" variant="filled" iconType="save">
+                          Save
+                        </Button>
+                      </div>
+                    )}
                   </Card>
                 )
             )
@@ -158,7 +274,6 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
           )}
         </>
       </LoadingSpinner>
-
       <DeleteModal
         showModal={showModal}
         onClose={() => setshowModal(false)}

@@ -6,6 +6,7 @@ import {
   Button,
   InputComponentHandler,
   Icon,
+  Card,
 } from '@/components';
 import { dropdownInputOptions, PostInputArgs, RouteUrl } from '@/utils';
 import { useState } from 'react';
@@ -20,7 +21,7 @@ export interface CreateBookingLayoutProps {}
 
 export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
   const dispatch = useAppDispatch();
-  const { createBookingLayoutSuccess } = useSelector(
+  const { createSuccess } = useSelector(
     (state: AppState) => state.bookingLayouts
   );
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
     setRequiredSwitch(switchValue === 'true' && true);
   }
 
-  function onCreateInput(): void {
+  function onAddInputField(): void {
     if (
       inputFieldType === null ||
       inputLabel === null ||
@@ -72,10 +73,22 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
     setRequiredSwitch(false);
   }
 
-  function onRemoveInputField(index: number): void {}
+  function onRemoveInputField(addedInputField: PostInputArgs): void {
+    if (addedInputFields === null) {
+      return;
+    }
+    const newInputFields = [...addedInputFields].filter(
+      (inputField) => inputField !== addedInputField
+    );
+    setAddedInputFields(newInputFields);
+  }
 
   function onCreateBookingLayout(): void {
-    if (bookingLayoutNameValue === null || addedInputFields.length < 1) {
+    if (
+      bookingLayoutNameValue === null ||
+      addedInputFields === null ||
+      addedInputFields.length < 1
+    ) {
       return;
     }
 
@@ -91,79 +104,121 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
     setInputLabel(null);
     setRequiredSwitch(false);
 
-    if (createBookingLayoutSuccess === true) {
+    if (createSuccess === true) {
       navigate(RouteUrl.BookingLayouts);
     }
   }
 
   return (
     <div className="grid gap-y-4 ">
-      <div className="grid gap-y-5">
-        <h1 className="text-2xl font-bold">Create a booking layout</h1>
-        <TextInput
-          onChange={(value) => onBookingLayoutNameChange(value)}
-          value={bookingLayoutNameValue}
-          label={'Booking layout name'}
-          required
-        />
+      <h1 className="text-2xl font-bold">Create a booking layout</h1>
+      <div>
+        <Card>
+          <div className="flex flex-row gap-8 items-center">
+            <Icon iconType="createNew" className="pt-2" />
+            <p>{t('bookingLayouts.createBookingLayout.description')}</p>
+          </div>
+        </Card>
       </div>
+      <Card className="p-8">
+        <div className="grid grid-cols-1 gap-y-5">
+          <TextInput
+            onChange={(value) => onBookingLayoutNameChange(value)}
+            value={bookingLayoutNameValue}
+            label={'Booking layout name'}
+            required
+          />
+          <div className="border border-slate-100 my-2"></div>
+          <DropdownInput
+            options={dropdownInputOptions}
+            onChange={(selectedOption) => onDropdownChange(selectedOption)}
+            value={inputFieldType}
+            label={t('bookingLayouts.createField.type')!}
+          />
+          <div className="flex items-center gap-x-4">
+            <TextInput
+              onChange={(inputValue) => onInputChange(inputValue)}
+              label={t('bookingLayouts.createField.label')!}
+              value={inputLabel}
+            />
+            <div className="px-4">
+              <SwitchInput
+                onChange={(switchValue) => onSwitchChange(switchValue)}
+                label="Required?"
+              />
+            </div>
+          </div>
+          <Button
+            variant={'outline'}
+            size="medium"
+            onClick={onAddInputField}
+            className="w-min"
+            iconType="plus"
+            iconColor="text-sky-500"
+          >
+            {t('bookingLayouts.createField.add')}
+          </Button>
+        </div>
+      </Card>
+
       <div className="border border-slate-100 mt-4"></div>
       <div className="grid grid-cols-1 gap-y-5">
-        <h2 className="text-2xl font-bold">{'Booking layout input fields'}</h2>
-        <DropdownInput
-          options={dropdownInputOptions}
-          onChange={(selectedOption) => onDropdownChange(selectedOption)}
-          value={inputFieldType}
-          label={t('bookingLayouts.createField.type')!}
-        />
-        <TextInput
-          onChange={(inputValue) => onInputChange(inputValue)}
-          label={t('bookingLayouts.createField.label')!}
-          value={inputLabel}
-        />
-        <SwitchInput
-          onChange={(switchValue) => onSwitchChange(switchValue)}
-          label="Required?"
-        />
-        <Button variant={'outline'} size="medium" onClick={onCreateInput}>
-          {t('bookingLayouts.createField.create')}
+        <h2 className="text-lg font-semibold">
+          {t('bookingLayouts.createField.preview')}
+        </h2>
+        <Card>
+          <div className="flex gap-x-3 items-center">
+            <p>Layout name:</p>
+            <p className="font-semibold">{bookingLayoutNameValue}</p>
+          </div>
+          {addedInputFields.length ? (
+            addedInputFields.map(
+              (addedInputField: PostInputArgs, index: number) => (
+                <div
+                  key={index}
+                  className="flex justify-between gap-4 items-center border border-slate-100 p-4 rounded-md my-4"
+                >
+                  <InputComponentHandler
+                    componentType={addedInputField.inputType}
+                    onChange={(value) => console.log(value)}
+                    label={addedInputField.label}
+                    required={addedInputField.required}
+                    value=""
+                  />
+                  <Icon
+                    iconType="remove"
+                    className="pt-4"
+                    onClick={() => onRemoveInputField(addedInputField)}
+                  />
+                </div>
+              )
+            )
+          ) : (
+            <div className="border border-slate-100 p-4 rounded-md my-4">
+              No fields added
+            </div>
+          )}
+        </Card>
+      </div>
+      <div className="border border-slate-100 mt-4"></div>
+      <div className="flex gap-x-4 justify-end">
+        <Button
+          variant="outline"
+          size="large"
+          className="w-min"
+          onClick={() => navigate(-1)}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="filled"
+          size="large"
+          className="w-min"
+          onClick={onCreateBookingLayout}
+        >
+          Create booking layout
         </Button>
       </div>
-      <div className="border border-slate-100 mt-4"></div>
-      <div className="grid grid-cols-1 gap-y-5">
-        <h2 className="text-2xl font-bold">
-          {t('bookingLayouts.createField.created')}
-        </h2>
-        <>
-          {addedInputFields.length ? (
-            addedInputFields.map((data: PostInputArgs, index: number) => (
-              <div
-                key={index}
-                className="flex justify-between gap-4 items-center"
-              >
-                <InputComponentHandler
-                  componentType={data.inputType}
-                  onChange={(value) => console.log(value)}
-                  label={data.label}
-                  required={data.required}
-                  value=""
-                />
-                <Icon
-                  iconType="trash"
-                  className="pt-4"
-                  onClick={() => onRemoveInputField(index)}
-                />
-              </div>
-            ))
-          ) : (
-            <>No fields added</>
-          )}
-        </>
-      </div>
-      <div className="border border-slate-100 mt-4"></div>
-      <Button variant="filled" size="large" onClick={onCreateBookingLayout}>
-        Create booking layout
-      </Button>
     </div>
   );
 };
