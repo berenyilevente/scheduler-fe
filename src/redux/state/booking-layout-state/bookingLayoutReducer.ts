@@ -1,4 +1,8 @@
-import { GetBookingLayoutArgs, PostBookingLayoutArgs } from '@/utils';
+import {
+  GetBookingLayoutArgs,
+  GetInputArgs,
+  PostBookingLayoutArgs,
+} from '@/utils';
 import {
   BookingLayoutActionTypes,
   DELETE_BOOKING_LAYOUT_FAILURE,
@@ -13,9 +17,14 @@ import {
   GET_BOOKING_LAYOUT_FAILURE,
   GET_BOOKING_LAYOUT_REQUEST,
   GET_BOOKING_LAYOUT_SUCCESS,
+  GET_PUBLIC_ROUTE,
+  PATCH_BOOKING_LAYOUT_FAILURE,
+  PATCH_BOOKING_LAYOUT_REQUEST,
+  PATCH_BOOKING_LAYOUT_SUCCESS,
   POST_BOOKING_LAYOUT_FAILURE,
   POST_BOOKING_LAYOUT_REQUEST,
   POST_BOOKING_LAYOUT_SUCCESS,
+  SET_PUBLIC_ROUTE,
 } from './bookingLayoutActionTypes';
 
 export interface IDefaultBookingLayoutState {
@@ -23,6 +32,7 @@ export interface IDefaultBookingLayoutState {
   bookingLayouts: GetBookingLayoutArgs[];
   bookingLayout: GetBookingLayoutArgs | undefined;
   error: string | null;
+  publicRoute: boolean;
   createSuccess: boolean;
   deleteSuccess: boolean;
   patchSuccess: boolean;
@@ -31,6 +41,7 @@ const defaultBookingLayoutState: IDefaultBookingLayoutState = {
   isLoading: false,
   error: null,
   bookingLayouts: [],
+  publicRoute: false,
   bookingLayout: undefined,
   createSuccess: false,
   deleteSuccess: false,
@@ -145,6 +156,39 @@ const BookingLayoutReducer = (
         isLoading: false,
         deleteSuccess: false,
         error: action.error,
+      };
+
+    case PATCH_BOOKING_LAYOUT_REQUEST:
+      return {
+        ...state,
+        patchSuccess: false,
+        isLoading: true,
+        error: null,
+      };
+    case PATCH_BOOKING_LAYOUT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        patchSuccess: true,
+        error: null,
+      };
+    case PATCH_BOOKING_LAYOUT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        patchSuccess: false,
+        error: action.error,
+      };
+
+    case SET_PUBLIC_ROUTE:
+      return {
+        ...state,
+        publicRoute: action.payload,
+      };
+
+    case GET_PUBLIC_ROUTE:
+      return {
+        ...state,
       };
 
     default:

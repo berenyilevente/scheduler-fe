@@ -4,7 +4,7 @@ import * as iconMap from '../icon/icon-types';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'filled' | 'outline' | 'text' | 'danger';
-  size: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
   className?: string;
   iconPosition?: 'left' | 'right';
   disabled?: boolean;

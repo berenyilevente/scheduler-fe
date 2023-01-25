@@ -15,9 +15,14 @@ import {
   DELETE_BOOKING_LAYOUT_FAILURE,
   DELETE_BOOKING_LAYOUT_REQUEST,
   DELETE_BOOKING_LAYOUT_SUCCESS,
+  PATCH_BOOKING_LAYOUT_REQUEST,
+  PATCH_BOOKING_LAYOUT_FAILURE,
+  PATCH_BOOKING_LAYOUT_SUCCESS,
+  SET_PUBLIC_ROUTE,
+  GET_PUBLIC_ROUTE,
 } from './bookingLayoutActionTypes';
 import { Dispatch } from 'redux';
-import { PostBookingLayoutArgs } from '@/utils';
+import { PatchBookingLayoutArgs, PostBookingLayoutArgs } from '@/utils';
 
 export const getBookingLayoutAction = () => async (dispatch: Dispatch) => {
   dispatch({
@@ -62,10 +67,9 @@ export const postBookingLayoutAction =
       type: POST_BOOKING_LAYOUT_REQUEST,
     });
     try {
-      const res = await client.postBookingLayout(bookingLayout);
+      await client.postBookingLayout(bookingLayout);
       dispatch({
         type: POST_BOOKING_LAYOUT_SUCCESS,
-        payload: res,
       });
     } catch (error: any) {
       dispatch({
@@ -81,13 +85,9 @@ export const deleteInputFromBookingLayoutAction =
       type: DELTE_INPUT_FROM_BOOKING_LAYOUT_REQUEST,
     });
     try {
-      const res = await client.deleteInputFromBookingLayout(
-        bookingLayoutId,
-        inputId
-      );
+      await client.deleteInputFromBookingLayout(bookingLayoutId, inputId);
       dispatch({
         type: DELTE_INPUT_FROM_BOOKING_LAYOUT_SUCCESS,
-        payload: res,
       });
     } catch (error: any) {
       dispatch({
@@ -103,10 +103,9 @@ export const deleteBookingLayoutAction =
       type: DELETE_BOOKING_LAYOUT_REQUEST,
     });
     try {
-      const res = await client.deleteBookingLayout(id);
+      await client.deleteBookingLayout(id);
       dispatch({
         type: DELETE_BOOKING_LAYOUT_SUCCESS,
-        payload: res,
       });
     } catch (error: any) {
       dispatch({
@@ -115,3 +114,35 @@ export const deleteBookingLayoutAction =
       });
     }
   };
+
+export const patchBookingLayoutAction =
+  (id: string, bookingLayout: PatchBookingLayoutArgs) =>
+  async (dispatch: Dispatch) => {
+    dispatch({
+      type: PATCH_BOOKING_LAYOUT_REQUEST,
+    });
+    try {
+      await client.patchBookingLayout(id, bookingLayout);
+      dispatch({
+        type: PATCH_BOOKING_LAYOUT_SUCCESS,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: PATCH_BOOKING_LAYOUT_FAILURE,
+        error: error.message,
+      });
+    }
+  };
+
+export const setPublicRouteAction =
+  (publicRoute: boolean) => async (dispatch: Dispatch) => {
+    dispatch({
+      type: SET_PUBLIC_ROUTE,
+      payload: publicRoute,
+    });
+  };
+export const getPublicRouteAction = () => async (dispatch: Dispatch) => {
+  dispatch({
+    type: GET_PUBLIC_ROUTE,
+  });
+};

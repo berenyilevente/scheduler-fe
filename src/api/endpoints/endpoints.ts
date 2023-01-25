@@ -3,6 +3,7 @@ import {
   GetInputArgs,
   GetBookingLayoutArgs,
   PostBookingLayoutArgs,
+  PatchBookingLayoutArgs,
 } from '@/utils';
 import { getByIdHelper } from '@/utils';
 import { ApiUrl } from '../utils/constants/apiUrls';
@@ -16,8 +17,7 @@ export const getInputsEndpoint = async (): Promise<GetInputArgs> => {
 export const postInputEndpoint = async (
   inputField: PostInputArgs
 ): Promise<void> => {
-  const response = await axiosInstance.post(ApiUrl.postInput, inputField);
-  return response.data.data;
+  await axiosInstance.post(ApiUrl.postInput, inputField);
 };
 
 export const deleteInputEndpoint = async (id: string): Promise<void> => {
@@ -43,11 +43,17 @@ export const getBookingLayoutByIdEndpoint = async (
 export const postBookingLayoutEndpoint = async (
   bookingLayout: PostBookingLayoutArgs
 ): Promise<void> => {
-  const response = await axiosInstance.post(
-    ApiUrl.postBookingLayout,
+  await axiosInstance.post(ApiUrl.postBookingLayout, bookingLayout);
+};
+
+export const patchBookingLayoutEndpoint = async (
+  id: string,
+  bookingLayout: PatchBookingLayoutArgs
+): Promise<void> => {
+  await axiosInstance.patch(
+    `${ApiUrl.PatchBookingLayout}/${id}`,
     bookingLayout
   );
-  return response.data.data;
 };
 
 export const deleteInputFromBookingLayoutEndpoint = async (

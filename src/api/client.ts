@@ -7,6 +7,7 @@ import {
   getBookingLayoutByIdEndpoint,
   deleteInputFromBookingLayoutEndpoint,
   deleteBookingLayoutEndpoint,
+  patchBookingLayoutEndpoint,
 } from './endpoints/endpoints';
 
 class Client {
@@ -18,6 +19,7 @@ class Client {
   getBookingLayoutById = getBookingLayoutByIdEndpoint;
   postBookingLayout = postBookingLayoutEndpoint;
   deleteBookingLayout = deleteBookingLayoutEndpoint;
+  patchBookingLayout = patchBookingLayoutEndpoint;
 }
 
 export default new Client();

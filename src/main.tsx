@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <Navigation isAuthenticated={true} children={<App />} />
+          <Navigation children={<App />} />
         </PersistGate>
       </Provider>
     </BrowserRouter>

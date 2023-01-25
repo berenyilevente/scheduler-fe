@@ -7,8 +7,9 @@ import {
   InputComponentHandler,
   Icon,
   Card,
+  Divider,
 } from '@/components';
-import { dropdownInputOptions, PostInputArgs, RouteUrl } from '@/utils';
+import { dropdownInputOptions, PostInputArgs, PrivateRouteUrl } from '@/utils';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '@/redux/store';
@@ -16,6 +17,7 @@ import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useTranslation } from 'react-i18next';
 import { postBookingLayoutAction } from '@/redux/state/booking-layout-state/bookingLayoutActions';
 import { useNavigate } from 'react-router-dom';
+import { AddInputField } from '../../components/add-input-field/AddInputField';
 
 export interface CreateBookingLayoutProps {}
 
@@ -105,7 +107,7 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
     setRequiredSwitch(false);
 
     if (createSuccess === true) {
-      navigate(RouteUrl.BookingLayouts);
+      navigate(PrivateRouteUrl.BookingLayouts);
     }
   }
 
@@ -128,36 +130,18 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
             label={'Booking layout name'}
             required
           />
-          <div className="border border-slate-100 my-2"></div>
-          <DropdownInput
-            options={dropdownInputOptions}
-            onChange={(selectedOption) => onDropdownChange(selectedOption)}
-            value={inputFieldType}
-            label={t('bookingLayouts.createField.type')!}
+          <Divider />
+          <AddInputField
+            dropdownInputOptions={dropdownInputOptions}
+            inputFieldType={inputFieldType}
+            inputLabel={inputLabel}
+            onDropdownChange={(selectedOption) =>
+              onDropdownChange(selectedOption)
+            }
+            onChange={(inputValue) => onInputChange(inputValue)}
+            onSwitchChange={(switchValue) => onSwitchChange(switchValue)}
+            onAddInputField={onAddInputField}
           />
-          <div className="flex items-center gap-x-4">
-            <TextInput
-              onChange={(inputValue) => onInputChange(inputValue)}
-              label={t('bookingLayouts.createField.label')!}
-              value={inputLabel}
-            />
-            <div className="px-4">
-              <SwitchInput
-                onChange={(switchValue) => onSwitchChange(switchValue)}
-                label="Required?"
-              />
-            </div>
-          </div>
-          <Button
-            variant={'outline'}
-            size="medium"
-            onClick={onAddInputField}
-            className="w-min"
-            iconType="plus"
-            iconColor="text-sky-500"
-          >
-            {t('bookingLayouts.createField.add')}
-          </Button>
         </div>
       </Card>
 

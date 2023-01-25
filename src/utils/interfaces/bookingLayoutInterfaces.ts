@@ -10,3 +10,8 @@ export interface PostBookingLayoutArgs {
   inputs: PostInputArgs[];
   name: string;
 }
+
+export interface PatchBookingLayoutArgs {
+  inputs: PostInputArgs[];
+  name: string;
+}

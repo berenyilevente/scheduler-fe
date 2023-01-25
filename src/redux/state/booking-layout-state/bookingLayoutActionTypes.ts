@@ -1,4 +1,8 @@
-import { GetBookingLayoutArgs, PostBookingLayoutArgs } from '@/utils';
+import {
+  GetBookingLayoutArgs,
+  PatchBookingLayoutArgs,
+  PostBookingLayoutArgs,
+} from '@/utils';
 
 export const GET_BOOKING_LAYOUT_REQUEST = 'GET_BOOKING_LAYOUT_REQUEST';
 export const GET_BOOKING_LAYOUT_SUCCESS = 'GET_BOOKING_LAYOUT_SUCCESS';
@@ -79,6 +83,33 @@ export interface DeleteBookingLayoutFailure {
   error: string;
 }
 
+export const PATCH_BOOKING_LAYOUT_REQUEST = 'PATCH_BOOKING_LAYOUT_REQUEST';
+export const PATCH_BOOKING_LAYOUT_SUCCESS = 'PATCH_BOOKING_LAYOUT_SUCCESS';
+export const PATCH_BOOKING_LAYOUT_FAILURE = 'PATCH_BOOKING_LAYOUT_FAILURE';
+export interface PatchBookingLayoutRequest {
+  type: typeof PATCH_BOOKING_LAYOUT_REQUEST;
+}
+export interface PatchBookingLayoutSuccess {
+  type: typeof PATCH_BOOKING_LAYOUT_SUCCESS;
+  payload: PatchBookingLayoutArgs;
+}
+export interface PatchBookingLayoutFailure {
+  type: typeof PATCH_BOOKING_LAYOUT_FAILURE;
+  error: string;
+}
+
+export const SET_PUBLIC_ROUTE = 'SET_PUBLIC_ROUTE';
+export interface SetPublicRoute {
+  type: typeof SET_PUBLIC_ROUTE;
+  payload: boolean;
+}
+
+export const GET_PUBLIC_ROUTE = 'GET_PUBLIC_ROUTE';
+export interface GetPublicRoute {
+  type: typeof GET_PUBLIC_ROUTE;
+  payload: boolean;
+}
+
 export type BookingLayoutActionTypes =
   | GetBookingLayoutRequest
   | GetBookingLayoutFailure
@@ -94,4 +125,9 @@ export type BookingLayoutActionTypes =
   | DeleteInputFromBookingLayoutSuccess
   | DeleteBookingLayoutRequest
   | DeleteBookingLayoutFailure
-  | DeleteBookingLayoutSuccess;
+  | DeleteBookingLayoutSuccess
+  | PatchBookingLayoutRequest
+  | PatchBookingLayoutFailure
+  | PatchBookingLayoutSuccess
+  | SetPublicRoute
+  | GetPublicRoute;

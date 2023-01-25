@@ -6,6 +6,7 @@ export interface DeleteModalProps {
   onClose: () => void;
   onDelete: () => void;
   title: string;
+  text?: string;
 }
 
 export const DeleteModal: React.FC<DeleteModalProps> = ({
@@ -13,10 +14,12 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
   onClose,
   onDelete,
   title,
+  text,
 }) => {
   return (
     <Modal showModal={showModal} closeModal={onClose} title={title}>
-      <div className="flex justify-around px-12 py-4">
+      <p className="px-8 py-4 text-sm">{text}</p>
+      <div className="flex justify-around pb-4">
         <Button variant="outline" size="medium" onClick={onClose}>
           Cancel
         </Button>

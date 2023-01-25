@@ -13,6 +13,13 @@
     },
     "createBookingLayout": {
       "description": "This is your layout creator. Here your can create a new booking layout by providing the desired input fields you would like to have included. Specify a layout name and the input fields you would like to have included with that layout. This can be changed later."
+    },
+    "deleteField":{
+      "title": "Delete booking layout",
+      "text": " Deleting this booking layout will delete all associated input fields. This action is irreversible. Are you sure you want to proceed?"
+    },
+    "editField":{
+      "save": "Save field"
     }
   },
   "inputFields": {
@@ -29,5 +36,8 @@
     "dropdown": {
       "select": "Please select"
     }
+  },
+  "general":{
+    "cancel": "Cancel"
   }
 }

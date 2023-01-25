@@ -1,11 +1,14 @@
-export enum RouteUrl {
+export enum PrivateRouteUrl {
   Home = '/',
-  Dashboard = '/dashboard',
+  Dashboard = '/admin/dashboard',
   Admin = '/admin',
-  BookingLayouts = '/booking-layouts',
-  InputSettings = '/input-settings',
-  User = '/appointment/:id',
-  CreateBookingLayout = '/create-booking-layout',
-  EditBookingLayout = '/edit-booking-layout/:id',
-  BookingLayoutById = '/booking-layout/:id',
+  BookingLayouts = '/admin/booking-layouts',
+  InputSettings = '/admin/input-settings',
+  User = '/admin/appointment/:id',
+  CreateBookingLayout = '/admin/create-booking-layout',
+  EditBookingLayout = '/admin/edit-booking-layout/:id',
+  BookingLayoutById = '/admin/booking-layout/:id',
+}
+export enum PublicRouteUrl {
+  User = '/user/user',
 }

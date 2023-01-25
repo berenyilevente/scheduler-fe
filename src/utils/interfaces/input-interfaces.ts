@@ -15,7 +15,7 @@ export interface PostInputArgs {
 }
 
 export interface GetInputArgs {
-  _id: string;
+  _id?: string;
   inputType: string;
   label: string;
   required: boolean;

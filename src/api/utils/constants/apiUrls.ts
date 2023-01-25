@@ -7,4 +7,5 @@ export const ApiUrl = {
   GetBookingLayoutById: 'get-booking-layout-by-id',
   postBookingLayout: 'post-booking-layout',
   deleteBookingLayout: 'delete-booking-layout',
+  PatchBookingLayout: 'patch-booking-layout',
 };
