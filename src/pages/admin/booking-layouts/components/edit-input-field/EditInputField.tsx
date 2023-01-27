@@ -38,7 +38,7 @@ const EditInputField: React.FC<EditInputFieldProps> = () => {
           iconColor="text-sky-500"
         >
           {t('bookingLayouts.editField.save')}
-        </Button>{' '}
+        </Button>
         <Button
           variant={'outline'}
           size="medium"

@@ -23,7 +23,6 @@ export const AddInputField: React.FC<AddInputFieldProps> = ({
 }) => {
   return (
     <>
-      <p className="text-md font-semibold mb-2">Add Input field</p>
       <div className="flex flex-col gap-y-3">
         <DropdownInput
           options={dropdownInputOptions}

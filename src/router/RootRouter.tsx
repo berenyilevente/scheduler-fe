@@ -1,15 +1,12 @@
-import { Routes, Route, useParams } from 'react-router-dom';
-import { Dashboard, BookingLayouts, Admin, User } from '@/pages';
-import { PrivateRouteUrl, PublicRouteUrl } from '@/utils';
+import { Routes, Route } from 'react-router-dom';
+import { Dashboard, BookingLayouts, Admin } from '@/pages';
+import { PrivateRouteUrl } from '@/utils';
 import { InputSettingsPage } from '@/pages/admin/booking-layouts/pages/input-settings/InputSettings';
 import { CreateBookingLayout } from '@/pages/admin/booking-layouts/pages/create-booking-layout/CreateBookingLayout';
 import EditBookingLayout from '@/pages/admin/booking-layouts/pages/edit-booking-layout/EditBookingLayout';
 
 export interface RootRouterProps {}
 export const RootRouter: React.FC<RootRouterProps> = () => {
-  const { params } = useParams();
-  console.log(params);
-
   return (
     <Routes>
       <Route path={PrivateRouteUrl.Dashboard} element={<Dashboard />} />

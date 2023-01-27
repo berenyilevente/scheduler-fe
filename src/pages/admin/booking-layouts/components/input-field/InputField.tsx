@@ -2,19 +2,25 @@ import { Icon } from '@/components';
 import i18n from '@/translations';
 import { GetBookingLayoutArgs, GetInputArgs, getTranslation } from '@/utils';
 import React from 'react';
+import { AddInputField } from '../add-input-field/AddInputField';
+import EditInputField from '../edit-input-field/EditInputField';
 
 export interface InputFieldProps {
   bookingLayout: GetBookingLayoutArgs;
   editInputFields: GetInputArgs[] | null;
   isEdit: boolean;
+  editSingleInputId: string | null;
   onRemoveInput: (field: GetInputArgs) => void;
+  onEditSingleInput: (inputId: string) => void;
 }
 
 export const InputField: React.FC<InputFieldProps> = ({
   bookingLayout,
   editInputFields,
   isEdit,
+  editSingleInputId,
   onRemoveInput,
+  onEditSingleInput,
 }) => {
   function getInputFields(): GetInputArgs[] {
     if (editInputFields === null) {
@@ -24,11 +30,11 @@ export const InputField: React.FC<InputFieldProps> = ({
   }
 
   return (
-    <div className="p-4">
+    <>
       {bookingLayout.inputs.length !== undefined ? (
-        getInputFields().map((inputField) => (
+        getInputFields().map((inputField, index) => (
           <div
-            key={inputField._id}
+            key={inputField._id || index}
             className="border border-slate-100 p-4 rounded-md my-4"
           >
             <div className="flex justify-between">
@@ -46,7 +52,7 @@ export const InputField: React.FC<InputFieldProps> = ({
                 <div className="flex gap-x-3 items-center">
                   <Icon
                     iconType={'edit'}
-                    onClick={() => console.log('editSingleInput')}
+                    onClick={() => onEditSingleInput(inputField._id!)}
                   />
                   <Icon
                     iconType="remove"
@@ -55,11 +61,12 @@ export const InputField: React.FC<InputFieldProps> = ({
                 </div>
               )}
             </div>
+            {editSingleInputId === inputField._id && <EditInputField />}
           </div>
         ))
       ) : (
         <span>No input fields added.</span>
       )}
-    </div>
+    </>
   );
 };

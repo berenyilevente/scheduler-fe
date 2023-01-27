@@ -58,6 +58,8 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
   const [inputFieldType, setInputFieldType] = useState<string | null>(null);
   const [inputLabel, setInputLabel] = useState<string | null>(null);
   const [requiredSwitch, setRequiredSwitch] = useState<boolean>(false);
+  const [editSingleInputId, setEditSingleInputId] =
+    useState<string | null>(null);
 
   function openDeleteModal(bookingLayoutId: string): void {
     setshowModal(true);
@@ -158,6 +160,12 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     setRequiredSwitch(switchValue === 'true' && true);
   }
 
+  function onEditSingleInput(inputId: string): void {
+    setEditSingleInputId((prevState) =>
+      prevState === inputId ? null : inputId
+    );
+  }
+
   useEffect(() => {
     if (urlBookingLayoutId === undefined) {
       navigate(`${PrivateRouteUrl.BookingLayoutById}${bookingLayouts[0]._id}`);
@@ -201,11 +209,9 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
                     <BookingLayoutCard
                       bookingLayout={bookingLayout}
                       isEdit={isEdit}
-                      addField={addField}
                       editInputFields={editInputFields}
                       bookingLayoutNameValue={bookingLayoutNameValue}
                       onChange={(value) => setBookingLayoutNameValue(value)}
-                      onAddInputField={onAddInputField}
                       onEditClick={onEditClick}
                       onResetValues={onResetValues}
                       openDeleteModal={openDeleteModal}
@@ -214,9 +220,11 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
                       bookingLayout={bookingLayout}
                       editInputFields={editInputFields}
                       isEdit={isEdit}
+                      editSingleInputId={editSingleInputId}
                       onRemoveInput={onRemoveInput}
+                      onEditSingleInput={onEditSingleInput}
                     />
-                    {addField && (
+                    {isEdit && (
                       <div className="border border-slate-100 p-4 rounded-md my-4">
                         <AddInputField
                           dropdownInputOptions={dropdownInputOptions}

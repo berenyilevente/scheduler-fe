@@ -13,11 +13,9 @@ import { Link } from 'react-router-dom';
 export interface BookingLayoutCardProps {
   bookingLayout: GetBookingLayoutArgs;
   isEdit: boolean;
-  addField: boolean;
   editInputFields: PostInputArgs[] | null;
   bookingLayoutNameValue: string | null;
   onChange: (value: string) => void;
-  onAddInputField: () => void;
   onEditClick: (bookingLayoutName: string) => void;
   onResetValues: () => void;
   openDeleteModal: (id: string) => void;
@@ -26,16 +24,14 @@ export interface BookingLayoutCardProps {
 export const BookingLayoutCard: React.FC<BookingLayoutCardProps> = ({
   bookingLayout,
   isEdit,
-  addField,
   bookingLayoutNameValue,
   onChange,
-  onAddInputField,
   onEditClick,
   onResetValues,
   openDeleteModal,
 }) => {
   const dispatch = useAppDispatch();
-
+  //TO DO Implement a user preview site
   return (
     <div className="grid gap-y-3 p-4">
       <div className="flex justify-between">
@@ -62,11 +58,7 @@ export const BookingLayoutCard: React.FC<BookingLayoutCardProps> = ({
               </Button>
             </Link>
           )}
-          {isEdit === true && addField === false && (
-            <Button variant="outline" iconType="plus" onClick={onAddInputField}>
-              Add new input field
-            </Button>
-          )}
+
           <Button
             variant="outline"
             size="medium"
