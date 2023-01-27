@@ -24,6 +24,12 @@ import { BookingLayoutCard } from './components/booking-layout-card/BookingLayou
 import { BookingLayoutHeader } from './components/booking-layout-header/BookingLayoutHeader';
 import { DeleteModal } from './components/delete-modal/DeleteModal';
 import { InputField } from './components/input-field/InputField';
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from 'react-beautiful-dnd';
 
 export interface BookingLayoutsProps {}
 
@@ -52,7 +58,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [addField, setAddField] = useState<boolean>(false);
   const [editInputFields, setEditInputFields] =
-    useState<PostInputArgs[] | null>(null);
+    useState<GetInputArgs[] | null>(null);
   const [bookingLayoutNameValue, setBookingLayoutNameValue] =
     useState<string | null>(null);
   const [inputFieldType, setInputFieldType] = useState<string | null>(null);
@@ -110,6 +116,11 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     if (editInputFields === null || bookingLayoutNameValue === null) {
       return;
     }
+
+    editInputFields.forEach((obj) => {
+      delete obj['_id'];
+    });
+
     dispatch(
       patchBookingLayoutAction(id, {
         inputs: editInputFields,
@@ -122,7 +133,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     }
   }
 
-  function onAddInputField(): void {
+  function onAddInputField(index: number): void {
     setAddField(!addField);
 
     if (
@@ -137,6 +148,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     setEditInputFields([
       ...editInputFields,
       {
+        _id: index.toString(),
         inputType: inputFieldType,
         label: inputLabel,
         required: requiredSwitch,
@@ -164,6 +176,30 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     setEditSingleInputId((prevState) =>
       prevState === inputId ? null : inputId
     );
+  }
+
+  function onDragEnd(result: DropResult): void {
+    const { destination, source, draggableId } = result;
+    if (
+      editInputFields === null ||
+      destination === null ||
+      destination === undefined ||
+      isEdit === false
+    ) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const newEditInputList = [...editInputFields];
+    const [removedItem] = newEditInputList.splice(source.index, 1);
+    newEditInputList.splice(destination.index, 0, removedItem);
+    setEditInputFields(newEditInputList);
   }
 
   useEffect(() => {
@@ -203,7 +239,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
         <>
           {bookingLayouts !== undefined ? (
             bookingLayouts.map(
-              (bookingLayout) =>
+              (bookingLayout, index) =>
                 bookingLayout._id === urlBookingLayoutId && (
                   <Card key={bookingLayout._id}>
                     <BookingLayoutCard
@@ -223,7 +259,9 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
                       editSingleInputId={editSingleInputId}
                       onRemoveInput={onRemoveInput}
                       onEditSingleInput={onEditSingleInput}
+                      onDragEnd={onDragEnd}
                     />
+
                     {isEdit && (
                       <div className="border border-slate-100 p-4 rounded-md my-4">
                         <AddInputField
@@ -237,7 +275,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
                           onSwitchChange={(switchValue) =>
                             onSwitchChange(switchValue)
                           }
-                          onAddInputField={onAddInputField}
+                          onAddInputField={() => onAddInputField(index)}
                         />
                       </div>
                     )}

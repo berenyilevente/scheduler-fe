@@ -1,11 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SideNavBar, TopNavBar } from '@/components';
-import { useSelector } from 'react-redux';
-import { AppState } from '@/redux/store';
-import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
-import { getPublicRouteAction } from '@/redux/state/booking-layout-state/bookingLayoutActions';
-import PublicRoutes from '@/router/PublicRoutes';
-import { useParams } from 'react-router-dom';
+import PublicRoutes from '@/router/PublicRouter';
 
 export interface NavigationProps {
   children: JSX.Element | JSX.Element[];
