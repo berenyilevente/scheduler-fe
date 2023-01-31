@@ -1,4 +1,4 @@
-import { User, Login } from '@/pages';
+import { User, Login, Register } from '@/pages';
 import { PublicRouteUrl } from '@/utils';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -8,6 +8,7 @@ const PublicRoutes: React.FC<PublicRoutesProps> = () => {
     <Routes>
       <Route path={PublicRouteUrl.User} element={<User />} />
       <Route path={PublicRouteUrl.Login} element={<Login />} />
+      <Route path={PublicRouteUrl.Register} element={<Register />} />
     </Routes>
   );
 };

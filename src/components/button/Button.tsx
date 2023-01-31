@@ -72,6 +72,17 @@ export const Button: React.FC<ButtonProps> = ({
           {children}
         </button>
       );
+    case 'text':
+      return (
+        <button
+          className={`bg-transparent whitespace-nowrap text-black py-2 px-4 font-medium text-sm ${getIconPosition()} ${className}`}
+          type={type}
+          {...rest}
+        >
+          <Icon className={iconColor} iconType={iconType!} />
+          {children}
+        </button>
+      );
 
     default:
       return (

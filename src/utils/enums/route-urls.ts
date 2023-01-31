@@ -12,4 +12,5 @@ export enum PrivateRouteUrl {
 export enum PublicRouteUrl {
   Login = '/login',
   User = '/user/user',
+  Register = '/register',
 }

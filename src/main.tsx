@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Navigation children={<App />} />
+        <App />
       </PersistGate>
     </Provider>
   </BrowserRouter>

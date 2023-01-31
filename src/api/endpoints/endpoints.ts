@@ -4,8 +4,10 @@ import {
   GetBookingLayoutArgs,
   PostBookingLayoutArgs,
   PatchBookingLayoutArgs,
+  LoginArgs,
+  LoginResponse,
+  RegisterArgs,
 } from '@/utils';
-import { getByIdHelper } from '@/utils';
 import { ApiUrl } from '../utils/constants/apiUrls';
 import { axiosInstance } from '../utils/functions/axiosInstance';
 
@@ -35,7 +37,7 @@ export const getBookingLayoutByIdEndpoint = async (
   id: string
 ): Promise<GetBookingLayoutArgs> => {
   const response = await axiosInstance.get(
-    `${ApiUrl.GetBookingLayoutById}/${id}`
+    `${ApiUrl.getBookingLayoutById}/${id}`
   );
   return response.data;
 };
@@ -51,7 +53,7 @@ export const patchBookingLayoutEndpoint = async (
   bookingLayout: PatchBookingLayoutArgs
 ): Promise<void> => {
   await axiosInstance.patch(
-    `${ApiUrl.PatchBookingLayout}/${id}`,
+    `${ApiUrl.patchBookingLayout}/${id}`,
     bookingLayout
   );
 };
@@ -70,4 +72,16 @@ export const deleteBookingLayoutEndpoint = async (
   id: string
 ): Promise<void> => {
   await axiosInstance.delete(`${ApiUrl.deleteBookingLayout}/${id}`);
+};
+
+export const loginEndpoint = async (
+  loginData: LoginArgs
+): Promise<LoginResponse> => {
+  const response = await axiosInstance.post(ApiUrl.login, loginData);
+  return response.data;
+};
+
+export const registerEndpoint = async (registerData: RegisterArgs) => {
+  const response = await axiosInstance.post(ApiUrl.register, registerData);
+  return response.data.data;
 };

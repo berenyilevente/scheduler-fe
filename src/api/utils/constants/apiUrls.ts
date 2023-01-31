@@ -4,8 +4,10 @@ export const ApiUrl = {
   deleteInput: 'delete-input',
   deleteInputFromBookingLayout: 'delete-input-from-booking-layout',
   getBookingLayout: 'get-booking-layout',
-  GetBookingLayoutById: 'get-booking-layout-by-id',
+  getBookingLayoutById: 'get-booking-layout-by-id',
   postBookingLayout: 'post-booking-layout',
   deleteBookingLayout: 'delete-booking-layout',
-  PatchBookingLayout: 'patch-booking-layout',
+  patchBookingLayout: 'patch-booking-layout',
+  login: 'login',
+  register: 'register',
 };

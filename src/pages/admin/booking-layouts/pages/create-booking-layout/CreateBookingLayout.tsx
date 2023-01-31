@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-  DropdownInput,
   TextInput,
-  SwitchInput,
   Button,
   InputComponentHandler,
   Icon,

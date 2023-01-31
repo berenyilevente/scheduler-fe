@@ -1,4 +1,9 @@
 {
+  "navigation":{
+    "dashboard": "Dashboard",
+    "bookingLayouts": "Booking layouts",
+    "admin": "Admin"
+  },
   "bookingLayouts": {
     "myLayouts": "My booking layouts",
     "description": "These are your booking layouts. Booking layouts are used to show you a preview about a specific booking that is going to be presented to your users. Also, you can add new, edit and customize existing layouts.",

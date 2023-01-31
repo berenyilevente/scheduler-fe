@@ -3,3 +3,4 @@ export * from './admin/dashboard/Dashboard';
 export * from './admin/admin/Admin';
 export * from './user/User';
 export * from './login/Login';
+export * from './register/Register';
