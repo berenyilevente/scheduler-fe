@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { DropdownOption } from '@/utils';
+import React, { useState } from 'react';
 import { Icon, InputLabel, InputError } from '@/components';
 import { getTranslation } from '@/utils';
 import i18n from '@/translations';

@@ -10,6 +10,7 @@ import {
   patchBookingLayoutEndpoint,
   loginEndpoint,
   registerEndpoint,
+  getUserEndpoint,
 } from './endpoints/endpoints';
 
 class Client {
@@ -24,6 +25,7 @@ class Client {
   patchBookingLayout = patchBookingLayoutEndpoint;
   login = loginEndpoint;
   register = registerEndpoint;
+  getUser = getUserEndpoint;
 }
 
 export default new Client();

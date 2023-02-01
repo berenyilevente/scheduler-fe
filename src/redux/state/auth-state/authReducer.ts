@@ -1,5 +1,8 @@
 import {
   AuthActionTypes,
+  GET_USER_FAILURE,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -13,14 +16,18 @@ export interface IDefaultAuthState {
   error: string | null;
   accessToken: string;
   refreshToken: string;
+  apiKey: string;
   isAuthenticated: boolean;
+  userId: string;
 }
 const defaultAuthState: IDefaultAuthState = {
   isLoading: false,
   error: null,
   accessToken: '',
   refreshToken: '',
+  apiKey: '',
   isAuthenticated: false,
+  userId: '',
 };
 const AuthReducer = (
   state = defaultAuthState,
@@ -43,6 +50,7 @@ const AuthReducer = (
         isAuthenticated: true,
         accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
+        userId: action.payload.user._id,
         error: null,
       };
     case LOGIN_FAILURE:
@@ -78,6 +86,26 @@ const AuthReducer = (
       return {
         ...state,
         accessToken: '',
+      };
+
+    case GET_USER_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        apiKey: action.payload.apiKey,
+        error: null,
+      };
+    case GET_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
       };
     default:
       return state;

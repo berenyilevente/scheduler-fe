@@ -12,10 +12,11 @@ export interface RegisterArgs {
 export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
-  user: User;
+  user: UserArgs;
 }
 
-export interface User {
+export interface UserArgs {
   _id: string;
   email: string;
+  apiKey: string;
 }

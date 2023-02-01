@@ -10,4 +10,5 @@ export const ApiUrl = {
   patchBookingLayout: 'patch-booking-layout',
   login: 'login',
   register: 'register',
+  getUser: 'get-user',
 };

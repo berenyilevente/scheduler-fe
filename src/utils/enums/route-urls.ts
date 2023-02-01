@@ -10,7 +10,9 @@ export enum PrivateRouteUrl {
   BookingLayoutById = '/admin/booking-layout/:id',
 }
 export enum PublicRouteUrl {
+  Home = '/',
   Login = '/login',
-  User = '/user/user',
+  User = '/user',
   Register = '/register',
+  NewBooking = '/new-booking/:id',
 }

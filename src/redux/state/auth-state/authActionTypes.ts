@@ -1,4 +1,4 @@
-import { LoginArgs, LoginResponse, RegisterArgs } from '@/utils';
+import { LoginArgs, LoginResponse, RegisterArgs, UserArgs } from '@/utils';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -34,6 +34,22 @@ export const LOGOUT = 'LOGOUT';
 export interface Logout {
   type: typeof LOGOUT;
 }
+
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILURE = 'GET_USER_FAILURE';
+export interface GetUserRequest {
+  type: typeof GET_USER_REQUEST;
+}
+export interface GetUserSuccess {
+  type: typeof GET_USER_SUCCESS;
+  payload: UserArgs;
+}
+export interface GetUserFailure {
+  type: typeof GET_USER_FAILURE;
+  error: string;
+}
+
 export type AuthActionTypes =
   | LoginRequest
   | LoginFailure
@@ -41,4 +57,7 @@ export type AuthActionTypes =
   | RegisterRequest
   | RegisterFailure
   | RegisterSuccess
-  | Logout;
+  | Logout
+  | GetUserRequest
+  | GetUserFailure
+  | GetUserSuccess;

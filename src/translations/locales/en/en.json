@@ -44,5 +44,9 @@
   },
   "general":{
     "cancel": "Cancel"
+  },
+  "admin":{
+    "title": "Admin panel",
+    "description": "This is your admin panel. Here you can see all the information that is unique to you and your business, like your api-key, company name and some statistics."
   }
 }

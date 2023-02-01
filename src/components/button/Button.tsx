@@ -24,15 +24,13 @@ export const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   function getIconPosition(): string {
-    if (iconType !== undefined) {
-      return 'flex items-center gap-x-3';
-    }
     if (iconPosition === 'left' && iconType !== undefined) {
-      return 'flex-row gap-x-3';
+      return 'flex-row';
     }
     if (iconPosition === 'right' && iconType !== undefined) {
-      return 'flex-row-reverse gap-x-3';
+      return 'flex-row-reverse';
     }
+
     return '';
   }
 
@@ -40,7 +38,7 @@ export const Button: React.FC<ButtonProps> = ({
     case 'filled':
       return (
         <button
-          className={`bg-sky-400 whitespace-nowrap text-white py-2 px-4 rounded-md font-medium text-sm ${getIconPosition()} ${className}`}
+          className={`bg-sky-400 whitespace-nowrap text-white py-2 px-4 rounded-md font-medium text-sm flex items-center gap-x-2 ${getIconPosition()} ${className}`}
           type={type}
           {...rest}
         >
@@ -52,7 +50,7 @@ export const Button: React.FC<ButtonProps> = ({
     case 'danger':
       return (
         <button
-          className={`bg-red-500 whitespace-nowrap text-white py-2 px-4 rounded-md font-medium ${getIconPosition()} ${className}`}
+          className={`bg-red-500 whitespace-nowrap text-white py-2 px-4 rounded-md font-medium flex items-center gap-x-2 ${getIconPosition()} ${className}`}
           type={type}
           {...rest}
         >
@@ -64,7 +62,7 @@ export const Button: React.FC<ButtonProps> = ({
     case 'outline':
       return (
         <button
-          className={`bg-transparent whitespace-nowrap text-black py-2 px-4 rounded-lg font-medium border text-sm border-slate-200 shadow-sm ${getIconPosition()} ${className}`}
+          className={`bg-transparent whitespace-nowrap text-black py-2 px-4 rounded-lg font-medium border text-sm border-slate-200 shadow-sm flex items-center gap-x-2 ${getIconPosition()} ${className}`}
           type={type}
           {...rest}
         >
@@ -75,7 +73,7 @@ export const Button: React.FC<ButtonProps> = ({
     case 'text':
       return (
         <button
-          className={`bg-transparent whitespace-nowrap text-black py-2 px-4 font-medium text-sm ${getIconPosition()} ${className}`}
+          className={`bg-transparent whitespace-nowrap text-black py-2 px-4 font-medium text-sm ${getIconPosition()} flex items-center gap-x-2 ${className}`}
           type={type}
           {...rest}
         >
@@ -87,7 +85,7 @@ export const Button: React.FC<ButtonProps> = ({
     default:
       return (
         <button
-          className={`bg-sky-400 whitespace-nowrap text-white py-2 px-4 rounded-md font-medium  ${getIconPosition()} ${className}`}
+          className={`bg-sky-400 whitespace-nowrap text-white py-2 px-4 rounded-md font-medium  ${getIconPosition()} flex items-center gap-x-2 ${className}`}
           type={type}
           {...rest}
         >

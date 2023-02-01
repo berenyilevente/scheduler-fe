@@ -1,4 +1,4 @@
-import { Card, LoadingSpinner, Divider } from '@/components';
+import { Card, LoadingSpinner, Divider, Button } from '@/components';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import {
   deleteBookingLayoutAction,
@@ -10,7 +10,6 @@ import {
   dropdownInputOptions,
   GetBookingLayoutArgs,
   GetInputArgs,
-  PostInputArgs,
   PrivateRouteUrl,
   useGetData,
 } from '@/utils';
@@ -24,12 +23,7 @@ import { BookingLayoutCard } from './components/booking-layout-card/BookingLayou
 import { BookingLayoutHeader } from './components/booking-layout-header/BookingLayoutHeader';
 import { DeleteModal } from './components/delete-modal/DeleteModal';
 import { InputField } from './components/input-field/InputField';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from 'react-beautiful-dnd';
+import { DropResult } from 'react-beautiful-dnd';
 
 export interface BookingLayoutsProps {}
 
@@ -202,7 +196,17 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     setEditInputFields(newEditInputList);
   }
 
+  function navigateToCreateBookingLayout(): void {
+    navigate(
+      `${PrivateRouteUrl.BookingLayouts}${PrivateRouteUrl.CreateBookingLayout}`
+    );
+  }
+
   useEffect(() => {
+    if (bookingLayouts.length < 1) {
+      return;
+    }
+
     if (urlBookingLayoutId === undefined) {
       navigate(`${PrivateRouteUrl.BookingLayoutById}${bookingLayouts[0]._id}`);
     }
@@ -237,7 +241,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
       <Divider />
       <LoadingSpinner isLoading={isLoading} size="small">
         <>
-          {bookingLayouts !== undefined ? (
+          {bookingLayouts.length ? (
             bookingLayouts.map(
               (bookingLayout, index) =>
                 bookingLayout._id === urlBookingLayoutId && (
@@ -289,7 +293,21 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
                 )
             )
           ) : (
-            <span>{t('bookingLayouts.noResult')}</span>
+            <div className="grid place-items-center gap-y-4">
+              <div>{t('bookingLayouts.noResult')}</div>
+              <div>
+                <Button
+                  variant="filled"
+                  size="medium"
+                  onClick={navigateToCreateBookingLayout}
+                  iconType="plus"
+                  iconColor="text-white"
+                  iconPosition="left"
+                >
+                  Create layout
+                </Button>
+              </div>
+            </div>
           )}
         </>
       </LoadingSpinner>

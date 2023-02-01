@@ -533,3 +533,43 @@ export const logout = (
     </g>
   </svg>
 );
+
+export const user = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+  >
+    <g fill="none" className="nc-icon-wrapper">
+      <path
+        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+        fill="#212121"
+      ></path>
+    </g>
+  </svg>
+);
+
+export const adminCard = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+  >
+    <g className="nc-icon-wrapper">
+      <path
+        d="M41,47H7a2,2,0,0,1-2-2V3A2,2,0,0,1,7,1H31L43,13V45A2,2,0,0,1,41,47Z"
+        fill="#4d8b9d"
+      ></path>
+      <path d="M31,1V11a2,2,0,0,0,2,2H43Z" fill="#2a4b55"></path>
+      <circle cx="18" cy="16" r="4" fill="#fff"></circle>
+      <circle cx="30" cy="20" r="4" fill="#fff"></circle>
+      <path d="M22,34a8,8,0,0,1,16,0v1H22Z" fill="#fff"></path>
+      <path
+        d="M10,30a8,8,0,0,1,14.653-4.436A10.037,10.037,0,0,0,20.461,31H10Z"
+        fill="#fff"
+      ></path>
+    </g>
+  </svg>
+);

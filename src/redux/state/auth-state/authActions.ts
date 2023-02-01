@@ -7,9 +7,12 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   LOGOUT,
+  GET_USER_REQUEST,
+  GET_USER_FAILURE,
+  GET_USER_SUCCESS,
 } from './authActionTypes';
 import { Dispatch } from 'redux';
-import { LoginArgs, RegisterArgs } from '@/utils';
+import { LoginArgs, RegisterArgs, UserArgs } from '@/utils';
 import { persistor } from '@/redux/store';
 
 export const loginAction =
@@ -56,4 +59,22 @@ export const logoutAction = () => async (dispatch: Dispatch) => {
   dispatch({
     type: LOGOUT,
   });
+};
+
+export const getUserAction = (id: string) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: GET_USER_REQUEST,
+  });
+  try {
+    const res = await client.getUser(id);
+    dispatch({
+      type: GET_USER_SUCCESS,
+      payload: res,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: GET_USER_FAILURE,
+      error: error.message,
+    });
+  }
 };

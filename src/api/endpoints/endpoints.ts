@@ -85,3 +85,10 @@ export const registerEndpoint = async (registerData: RegisterArgs) => {
   const response = await axiosInstance.post(ApiUrl.register, registerData);
   return response.data.data;
 };
+
+export const getUserEndpoint = async (
+  id: string
+): Promise<GetBookingLayoutArgs> => {
+  const response = await axiosInstance.get(`${ApiUrl.getUser}/${id}`);
+  return response.data;
+};

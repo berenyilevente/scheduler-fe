@@ -33,19 +33,25 @@ export const BookingLayoutHeader: React.FC<BookingLayoutHeaderProps> = ({
   }
 
   return (
-    <>
+    <div
+      className={`grid gap-y-4 ${bookingLayouts.length ? '' : 'opacity-50'}`}
+    >
       <div className="flex justify-between">
         <h2 className="text-2xl font-bold">{t('bookingLayouts.myLayouts')}</h2>
-        <Button
-          variant="outline"
-          size="medium"
-          onClick={navigateToCreateBookingLayout}
-          iconType="plus"
-          iconColor="text-sky-500"
-          iconPosition="left"
-        >
-          Create layout
-        </Button>
+        {bookingLayouts.length ? (
+          <Button
+            variant="outline"
+            size="medium"
+            onClick={navigateToCreateBookingLayout}
+            iconType="plus"
+            iconColor="text-sky-500"
+            iconPosition="left"
+          >
+            Create layout
+          </Button>
+        ) : (
+          <></>
+        )}
       </div>
 
       <div>
@@ -79,6 +85,6 @@ export const BookingLayoutHeader: React.FC<BookingLayoutHeaderProps> = ({
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
