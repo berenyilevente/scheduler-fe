@@ -13,4 +13,3 @@ export * from './functions/getTranslation';
 export * from './hooks/useOutsideClickHandler';
 export * from './hooks/useInputValueHandler';
 export * from './hooks/useGetData';
-export * from './hooks/useIsFirstRender';

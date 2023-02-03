@@ -48,16 +48,19 @@ export const BookingLayoutCard: React.FC<BookingLayoutCardProps> = ({
         </div>
         <div className="flex gap-3 items-center">
           {isEdit === false && (
-            <Link to={PublicRouteUrl.User} target="_blank">
-              <Button
-                variant="outline"
-                iconType="eye"
-                onClick={() => dispatch(setPublicRouteAction(true))}
-                iconPosition="left"
+            <Button
+              variant="outline"
+              iconType="eye"
+              onClick={() => dispatch(setPublicRouteAction(true))}
+              iconPosition="left"
+            >
+              <Link
+                to={`${PublicRouteUrl.NewBooking}${bookingLayout._id}`}
+                target="_blank"
               >
                 Preview
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           )}
 
           <Button

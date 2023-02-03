@@ -111,10 +111,6 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
       return;
     }
 
-    editInputFields.forEach((obj) => {
-      delete obj['_id'];
-    });
-
     dispatch(
       patchBookingLayoutAction(id, {
         inputs: editInputFields,
@@ -170,30 +166,6 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
     setEditSingleInputId((prevState) =>
       prevState === inputId ? null : inputId
     );
-  }
-
-  function onDragEnd(result: DropResult): void {
-    const { destination, source, draggableId } = result;
-    if (
-      editInputFields === null ||
-      destination === null ||
-      destination === undefined ||
-      isEdit === false
-    ) {
-      return;
-    }
-
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
-    }
-
-    const newEditInputList = [...editInputFields];
-    const [removedItem] = newEditInputList.splice(source.index, 1);
-    newEditInputList.splice(destination.index, 0, removedItem);
-    setEditInputFields(newEditInputList);
   }
 
   function navigateToCreateBookingLayout(): void {
@@ -263,7 +235,7 @@ export const BookingLayouts: React.FC<BookingLayoutsProps> = () => {
                       editSingleInputId={editSingleInputId}
                       onRemoveInput={onRemoveInput}
                       onEditSingleInput={onEditSingleInput}
-                      onDragEnd={onDragEnd}
+                      setEditInputFields={setEditInputFields}
                     />
 
                     {isEdit && (

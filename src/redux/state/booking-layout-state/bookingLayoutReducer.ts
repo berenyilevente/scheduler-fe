@@ -197,7 +197,6 @@ const BookingLayoutReducer = (
     case GET_BOOKING_LAYOUT_USER_REQUEST:
       return {
         ...state,
-
         isLoading: true,
         error: null,
       };

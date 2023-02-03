@@ -15,6 +15,7 @@ export const Admin: React.FC<AdminProps> = () => {
     dispatch(getUserAction(userId));
   }, []);
 
+  console.log(userId);
   return (
     <div className="grid gap-y-4">
       <h2 className="text-2xl font-bold">{t('admin.title')}</h2>

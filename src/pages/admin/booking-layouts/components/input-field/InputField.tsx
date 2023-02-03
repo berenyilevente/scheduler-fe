@@ -10,7 +10,6 @@ import {
   DroppableProvided,
   DropResult,
 } from 'react-beautiful-dnd';
-import { AddInputField } from '../add-input-field/AddInputField';
 import EditInputField from '../edit-input-field/EditInputField';
 
 export interface InputFieldProps {
@@ -20,7 +19,7 @@ export interface InputFieldProps {
   editSingleInputId: string | null;
   onRemoveInput: (field: GetInputArgs) => void;
   onEditSingleInput: (inputId: string) => void;
-  onDragEnd: (result: DropResult) => void;
+  setEditInputFields: (editedInputs: GetInputArgs[]) => void;
 }
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -30,13 +29,41 @@ export const InputField: React.FC<InputFieldProps> = ({
   editSingleInputId,
   onRemoveInput,
   onEditSingleInput,
-  onDragEnd,
+  setEditInputFields,
 }) => {
   function getInputFields(): GetInputArgs[] {
     if (editInputFields === null) {
+      console.log('bookingLayout inputs');
+
       return bookingLayout.inputs;
     }
+    console.log('editedInputs');
+
     return editInputFields;
+  }
+
+  function onDragEnd(result: DropResult): void {
+    const { destination, source, draggableId } = result;
+    if (
+      editInputFields === null ||
+      destination === null ||
+      destination === undefined ||
+      isEdit === false
+    ) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const newEditInputList = [...editInputFields];
+    const [removedItem] = newEditInputList.splice(source.index, 1);
+    newEditInputList.splice(destination.index, 0, removedItem);
+    setEditInputFields(newEditInputList);
   }
 
   return (

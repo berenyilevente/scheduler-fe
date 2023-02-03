@@ -1,3 +1,4 @@
+import { store } from '@/redux/store';
 import {
   PostInputArgs,
   GetInputArgs,
@@ -10,6 +11,9 @@ import {
 } from '@/utils';
 import { ApiUrl } from '../utils/constants/apiUrls';
 import { axiosInstance } from '../utils/functions/axiosInstance';
+import { setupInterceptors } from '../utils/functions/interceptors';
+
+setupInterceptors(store);
 
 export const getInputsEndpoint = async (): Promise<GetInputArgs> => {
   const response = await axiosInstance.get(ApiUrl.GetInput);
