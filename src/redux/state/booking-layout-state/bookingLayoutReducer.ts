@@ -17,6 +17,9 @@ import {
   GET_BOOKING_LAYOUT_FAILURE,
   GET_BOOKING_LAYOUT_REQUEST,
   GET_BOOKING_LAYOUT_SUCCESS,
+  GET_BOOKING_LAYOUT_USER_FAILURE,
+  GET_BOOKING_LAYOUT_USER_REQUEST,
+  GET_BOOKING_LAYOUT_USER_SUCCESS,
   GET_PUBLIC_ROUTE,
   PATCH_BOOKING_LAYOUT_FAILURE,
   PATCH_BOOKING_LAYOUT_REQUEST,
@@ -189,6 +192,28 @@ const BookingLayoutReducer = (
     case GET_PUBLIC_ROUTE:
       return {
         ...state,
+      };
+
+    case GET_BOOKING_LAYOUT_USER_REQUEST:
+      return {
+        ...state,
+
+        isLoading: true,
+        error: null,
+      };
+    case GET_BOOKING_LAYOUT_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        bookingLayout: action.payload,
+        error: null,
+      };
+    case GET_BOOKING_LAYOUT_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+
+        error: action.error,
       };
 
     default:

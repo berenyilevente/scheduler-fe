@@ -110,6 +110,24 @@ export interface GetPublicRoute {
   payload: boolean;
 }
 
+export const GET_BOOKING_LAYOUT_USER_REQUEST =
+  'GET_BOOKING_LAYOUT_USER_REQUEST';
+export const GET_BOOKING_LAYOUT_USER_SUCCESS =
+  'GET_BOOKING_LAYOUT_USER_SUCCESS';
+export const GET_BOOKING_LAYOUT_USER_FAILURE =
+  'GET_BOOKING_LAYOUT_USER_FAILURE';
+export interface BookingLayoutUserRequest {
+  type: typeof GET_BOOKING_LAYOUT_USER_REQUEST;
+}
+export interface BookingLayoutUserSuccess {
+  type: typeof GET_BOOKING_LAYOUT_USER_SUCCESS;
+  payload: GetBookingLayoutArgs;
+}
+export interface BookingLayoutUserFailure {
+  type: typeof GET_BOOKING_LAYOUT_USER_FAILURE;
+  error: string;
+}
+
 export type BookingLayoutActionTypes =
   | GetBookingLayoutRequest
   | GetBookingLayoutFailure
@@ -130,4 +148,7 @@ export type BookingLayoutActionTypes =
   | PatchBookingLayoutFailure
   | PatchBookingLayoutSuccess
   | SetPublicRoute
-  | GetPublicRoute;
+  | GetPublicRoute
+  | BookingLayoutUserRequest
+  | BookingLayoutUserFailure
+  | BookingLayoutUserSuccess;

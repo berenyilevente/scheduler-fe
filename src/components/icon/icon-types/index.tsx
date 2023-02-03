@@ -573,3 +573,35 @@ export const adminCard = (
     </g>
   </svg>
 );
+
+export const copy = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+  >
+    <g fill="none" className="nc-icon-wrapper">
+      <path
+        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm-1 4H8c-1.1 0-1.99.9-1.99 2L6 21c0 1.1.89 2 1.99 2H19c1.1 0 2-.9 2-2V11l-6-6zM8 21V7h6v5h5v9H8z"
+        fill="#212121"
+      ></path>
+    </g>
+  </svg>
+);
+
+export const done = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+  >
+    <g fill="none" className="nc-icon-wrapper">
+      <path
+        d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+        fill="#212121"
+      ></path>
+    </g>
+  </svg>
+);

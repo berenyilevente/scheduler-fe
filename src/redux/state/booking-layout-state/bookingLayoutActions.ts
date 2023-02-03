@@ -20,6 +20,9 @@ import {
   PATCH_BOOKING_LAYOUT_SUCCESS,
   SET_PUBLIC_ROUTE,
   GET_PUBLIC_ROUTE,
+  GET_BOOKING_LAYOUT_USER_FAILURE,
+  GET_BOOKING_LAYOUT_USER_REQUEST,
+  GET_BOOKING_LAYOUT_USER_SUCCESS,
 } from './bookingLayoutActionTypes';
 import { Dispatch } from 'redux';
 import { PatchBookingLayoutArgs, PostBookingLayoutArgs } from '@/utils';
@@ -141,8 +144,28 @@ export const setPublicRouteAction =
       payload: publicRoute,
     });
   };
+
 export const getPublicRouteAction = () => async (dispatch: Dispatch) => {
   dispatch({
     type: GET_PUBLIC_ROUTE,
   });
 };
+
+export const getBookingLayoutUserAction =
+  (apiKey: string, name: string) => async (dispatch: Dispatch) => {
+    dispatch({
+      type: GET_BOOKING_LAYOUT_USER_REQUEST,
+    });
+    try {
+      const res = await client.getBookingLayoutUser(apiKey, name);
+      dispatch({
+        type: GET_BOOKING_LAYOUT_USER_SUCCESS,
+        payload: res,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: GET_BOOKING_LAYOUT_USER_FAILURE,
+        error: error.message,
+      });
+    }
+  };

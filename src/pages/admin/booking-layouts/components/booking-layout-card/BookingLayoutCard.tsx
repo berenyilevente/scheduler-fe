@@ -53,6 +53,7 @@ export const BookingLayoutCard: React.FC<BookingLayoutCardProps> = ({
                 variant="outline"
                 iconType="eye"
                 onClick={() => dispatch(setPublicRouteAction(true))}
+                iconPosition="left"
               >
                 Preview
               </Button>
@@ -63,6 +64,7 @@ export const BookingLayoutCard: React.FC<BookingLayoutCardProps> = ({
             variant="outline"
             size="medium"
             iconType={`${isEdit ? 'refresh' : 'settings'}`}
+            iconPosition="left"
             onClick={() =>
               isEdit === false
                 ? onEditClick(bookingLayout.name)
@@ -77,6 +79,7 @@ export const BookingLayoutCard: React.FC<BookingLayoutCardProps> = ({
             iconType="trash"
             className="text-black"
             onClick={() => openDeleteModal(bookingLayout._id)}
+            iconPosition="left"
           >
             Delete
           </Button>

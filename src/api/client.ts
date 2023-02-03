@@ -11,6 +11,7 @@ import {
   loginEndpoint,
   registerEndpoint,
   getUserEndpoint,
+  getBookingLayoutUserEndpoint,
 } from './endpoints/endpoints';
 
 class Client {
@@ -26,6 +27,7 @@ class Client {
   login = loginEndpoint;
   register = registerEndpoint;
   getUser = getUserEndpoint;
+  getBookingLayoutUser = getBookingLayoutUserEndpoint;
 }
 
 export default new Client();
