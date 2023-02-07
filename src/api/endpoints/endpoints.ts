@@ -97,14 +97,9 @@ export const getUserEndpoint = async (
   return response.data;
 };
 
-export const getBookingLayoutUserEndpoint = async (
-  apiKey: string,
-  name: string
-) => {
-  console.log(apiKey, name);
-  const response = await axiosInstance.get(
-    `${ApiUrl.GetBookingLayoutUser}?apiKey=${apiKey}&name=${name}`
-  );
-  console.log(response.data);
+export const getRefreshTokenEndpoint = async (refreshToken: string) => {
+  const response = await axiosInstance.post(ApiUrl.RefreshToken, {
+    refreshToken,
+  });
   return response.data;
 };

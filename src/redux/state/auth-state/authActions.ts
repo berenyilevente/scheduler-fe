@@ -10,10 +10,13 @@ import {
   GET_USER_REQUEST,
   GET_USER_FAILURE,
   GET_USER_SUCCESS,
+  REFRESH_TOKEN_FAILURE,
+  REFRESH_TOKEN_REQUEST,
+  REFRESH_TOKEN_SUCCESS,
 } from './authActionTypes';
 import { Dispatch } from 'redux';
 import { LoginArgs, RegisterArgs, UserArgs } from '@/utils';
-import { persistor } from '@/redux/store';
+import { persistor, RootState } from '@/redux/store';
 
 export const loginAction =
   (loginData: LoginArgs) => async (dispatch: Dispatch) => {
@@ -78,3 +81,24 @@ export const getUserAction = (id: string) => async (dispatch: Dispatch) => {
     });
   }
 };
+
+export const refreshTokenAction =
+  () => async (dispatch: Dispatch, getState: () => RootState) => {
+    const { refreshToken } = getState().auth;
+
+    dispatch({
+      type: REFRESH_TOKEN_REQUEST,
+    });
+    try {
+      const res = await client.getRefreshToken(refreshToken);
+      dispatch({
+        type: REFRESH_TOKEN_SUCCESS,
+        payload: res,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: REFRESH_TOKEN_FAILURE,
+        error: error.message,
+      });
+    }
+  };

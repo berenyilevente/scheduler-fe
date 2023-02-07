@@ -18,5 +18,9 @@ export interface LoginResponse {
 export interface UserArgs {
   _id: string;
   email: string;
-  apiKey: string;
+}
+
+export interface RefreshTokenResponse {
+  accessToken: string;
+  refreshToken: string;
 }

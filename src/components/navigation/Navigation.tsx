@@ -1,7 +1,5 @@
 import React from 'react';
 import { SideNavBar, TopNavBar } from '@/components';
-import PublicRoutes from '@/router/PublicRouter';
-import { UserRole } from '@/utils';
 
 export interface NavigationProps {
   children: JSX.Element | JSX.Element[];

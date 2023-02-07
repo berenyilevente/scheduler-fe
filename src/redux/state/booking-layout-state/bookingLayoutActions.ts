@@ -150,22 +150,3 @@ export const getPublicRouteAction = () => async (dispatch: Dispatch) => {
     type: GET_PUBLIC_ROUTE,
   });
 };
-
-export const getBookingLayoutUserAction =
-  (apiKey: string, name: string) => async (dispatch: Dispatch) => {
-    dispatch({
-      type: GET_BOOKING_LAYOUT_USER_REQUEST,
-    });
-    try {
-      const res = await client.getBookingLayoutUser(apiKey, name);
-      dispatch({
-        type: GET_BOOKING_LAYOUT_USER_SUCCESS,
-        payload: res,
-      });
-    } catch (error: any) {
-      dispatch({
-        type: GET_BOOKING_LAYOUT_USER_FAILURE,
-        error: error.message,
-      });
-    }
-  };

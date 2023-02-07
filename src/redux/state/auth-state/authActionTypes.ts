@@ -1,4 +1,10 @@
-import { LoginArgs, LoginResponse, RegisterArgs, UserArgs } from '@/utils';
+import {
+  LoginArgs,
+  LoginResponse,
+  RefreshTokenResponse,
+  RegisterArgs,
+  UserArgs,
+} from '@/utils';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -49,6 +55,20 @@ export interface GetUserFailure {
   type: typeof GET_USER_FAILURE;
   error: string;
 }
+export const REFRESH_TOKEN_REQUEST = 'REFRESH_TOKEN_REQUEST';
+export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS';
+export const REFRESH_TOKEN_FAILURE = 'REFRESH_TOKEN_FAILURE';
+export interface RefreshTokenRequest {
+  type: typeof REFRESH_TOKEN_REQUEST;
+}
+export interface RefreshTokenSuccess {
+  type: typeof REFRESH_TOKEN_SUCCESS;
+  payload: RefreshTokenResponse;
+}
+export interface RefreshTokenFailure {
+  type: typeof REFRESH_TOKEN_FAILURE;
+  error: string;
+}
 
 export type AuthActionTypes =
   | LoginRequest
@@ -60,4 +80,7 @@ export type AuthActionTypes =
   | Logout
   | GetUserRequest
   | GetUserFailure
-  | GetUserSuccess;
+  | GetUserSuccess
+  | RefreshTokenRequest
+  | RefreshTokenFailure
+  | RefreshTokenSuccess;

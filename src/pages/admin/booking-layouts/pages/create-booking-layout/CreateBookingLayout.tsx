@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   TextInput,
   Button,
@@ -103,10 +103,7 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
     setInputFieldType(null);
     setInputLabel(null);
     setRequiredSwitch(false);
-
-    if (createSuccess === true) {
-      navigate(PrivateRouteUrl.BookingLayouts);
-    }
+    navigate(PrivateRouteUrl.BookingLayouts);
   }
 
   return (
@@ -142,8 +139,7 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
           />
         </div>
       </Card>
-
-      <div className="border border-slate-100 mt-4"></div>
+      <Divider />
       <div className="grid grid-cols-1 gap-y-5">
         <h2 className="text-lg font-semibold">
           {t('bookingLayouts.createField.preview')}

@@ -1,3 +1,4 @@
+import { UserArgs } from '@/utils';
 import {
   AuthActionTypes,
   GET_USER_FAILURE,
@@ -7,26 +8,31 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
+  REFRESH_TOKEN_FAILURE,
+  REFRESH_TOKEN_REQUEST,
+  REFRESH_TOKEN_SUCCESS,
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
 } from './authActionTypes';
+
 export interface IDefaultAuthState {
   isLoading: boolean;
   error: string | null;
   accessToken: string;
   refreshToken: string;
-  apiKey: string;
   isAuthenticated: boolean;
   userId: string;
+  user: UserArgs;
 }
+
 const defaultAuthState: IDefaultAuthState = {
   isLoading: false,
   error: null,
   accessToken: '',
   refreshToken: '',
-  apiKey: '',
   isAuthenticated: false,
+  user: { email: '', _id: '' },
   userId: '',
 };
 const AuthReducer = (
@@ -98,10 +104,31 @@ const AuthReducer = (
       return {
         ...state,
         isLoading: false,
-        apiKey: action.payload.apiKey,
+        user: action.payload,
         error: null,
       };
     case GET_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
+      };
+
+    case REFRESH_TOKEN_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case REFRESH_TOKEN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        error: null,
+      };
+    case REFRESH_TOKEN_FAILURE:
       return {
         ...state,
         isLoading: false,

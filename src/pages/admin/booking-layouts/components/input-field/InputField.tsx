@@ -33,12 +33,8 @@ export const InputField: React.FC<InputFieldProps> = ({
 }) => {
   function getInputFields(): GetInputArgs[] {
     if (editInputFields === null) {
-      console.log('bookingLayout inputs');
-
       return bookingLayout.inputs;
     }
-    console.log('editedInputs');
-
     return editInputFields;
   }
 

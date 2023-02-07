@@ -8,14 +8,13 @@ import { t } from 'i18next';
 
 export interface AdminProps {}
 export const Admin: React.FC<AdminProps> = () => {
-  const { apiKey, userId } = useSelector((state: AppState) => state.auth);
+  const { userId } = useSelector((state: AppState) => state.auth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getUserAction(userId));
   }, []);
 
-  console.log(userId);
   return (
     <div className="grid gap-y-4">
       <h2 className="text-2xl font-bold">{t('admin.title')}</h2>
@@ -34,7 +33,6 @@ export const Admin: React.FC<AdminProps> = () => {
           <h2 className="text-lg font-semibold">My api key</h2>
           <div className="border border-slate-100 p-4 rounded-md my-4 flex gap-x-4 items-center">
             <Icon iconType="password"></Icon>
-            <p>{apiKey}</p>
           </div>
         </Card>
       </div>
