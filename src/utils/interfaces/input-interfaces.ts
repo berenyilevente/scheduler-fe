@@ -19,4 +19,5 @@ export interface GetInputArgs {
   inputType: string;
   label: string;
   required: boolean;
+  value?: string;
 }

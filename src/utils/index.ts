@@ -4,7 +4,7 @@ export * from './interfaces/dropdown-interfaces';
 export * from './interfaces/input-interfaces';
 export * from './interfaces/booking-layout-interfaces';
 export * from './interfaces/auth-interfaces';
-export * from './enums/input-component';
+export * from './enums/input-type';
 export * from './enums/route-urls';
 export * from './enums/user-roles';
 export * from './functions/getCurrentLanguage';

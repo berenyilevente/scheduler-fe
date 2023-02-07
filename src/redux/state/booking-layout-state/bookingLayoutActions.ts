@@ -65,12 +65,13 @@ export const getBookingLayoutByIdAction =
   };
 
 export const postBookingLayoutAction =
-  (bookingLayout: PostBookingLayoutArgs) => async (dispatch: Dispatch) => {
+  (userId: string, bookingLayout: PostBookingLayoutArgs) =>
+  async (dispatch: Dispatch) => {
     dispatch({
       type: POST_BOOKING_LAYOUT_REQUEST,
     });
     try {
-      await client.postBookingLayout(bookingLayout);
+      await client.postBookingLayout(userId, bookingLayout);
       dispatch({
         type: POST_BOOKING_LAYOUT_SUCCESS,
       });

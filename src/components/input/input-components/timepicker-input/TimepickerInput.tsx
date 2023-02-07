@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { timeValues } from '@/utils';
-import { Icon, InputLabel, InputError } from '@/components';
+import { InputLabel, InputError } from '@/components';
 
 export interface TimepickerInputProps {
   onChange: (time: string, componentType: string | null) => void;
@@ -8,6 +8,7 @@ export interface TimepickerInputProps {
   required?: boolean;
   errorMessage?: string;
   componentType?: string;
+  bookedTimes?: string[];
 }
 
 export const TimepickerInput: React.FC<TimepickerInputProps> = ({
@@ -16,65 +17,98 @@ export const TimepickerInput: React.FC<TimepickerInputProps> = ({
   required,
   errorMessage,
   componentType,
+  bookedTimes,
 }) => {
-  const [timeValue, setTimeValue] = useState<string>();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const toggleDropdown = () => setIsOpen((prevIsOpen) => !prevIsOpen);
+  //TODO implement a times selector, for choosing what time is available for the clients to make a booking
 
+  //TODO implement time range functionality
+  const [selectedTimeRange, setSelectedTimeRange] = useState<string>();
   const onTimeClick = (time: string): void => {
-    setIsOpen(false);
     onChange(time, componentType ? componentType : null);
-    setTimeValue(time);
+    setSelectedTimeRange(time);
   };
 
-  const InputValue = (): JSX.Element => {
-    if (timeValue !== undefined) {
-      return <span>{timeValue}</span>;
-    }
-    return <span>Please select a time</span>;
-  };
+  //TO DO loop over the avilable times only (available times will come from the backend)
+  function getTimeOfDay(): Record<string, string[]> {
+    const categorizedTimes: Record<string, string[]> = {
+      morning: [],
+      noon: [],
+      afternoon: [],
+    };
 
-  const onError = (errorMessage?: string): string => {
-    if (!errorMessage) {
-      return '';
-    }
-    return 'border-red-500';
-  };
+    const availableTimes: string[] = timeValues.filter(
+      (timeValue) => bookedTimes?.indexOf(timeValue) !== -1
+    );
+
+    availableTimes.forEach((time) => {
+      const hour = parseInt(time.split(':')[0], 10);
+      if (hour >= 0 && hour < 12) {
+        categorizedTimes.morning.push(time);
+      }
+
+      if (hour >= 12 && hour < 16) {
+        categorizedTimes.noon.push(time);
+      }
+
+      if (hour > 16) {
+        categorizedTimes.afternoon.push(time);
+      }
+    });
+
+    return categorizedTimes;
+  }
+
   return (
-    <InputLabel label={label} required={required} errorMessage={errorMessage}>
-      <div className="relative inline-block text-left select-none w-full">
+    <InputLabel label={''} required={required} errorMessage={errorMessage}>
+      <div className="w-full grid gap-y-2">
         <div>
-          <span className="rounded-md shadow-sm">
-            <button
-              type="button"
-              onClick={toggleDropdown}
-              className={`flex items-center justify-between w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm text-gray-700 ${onError(
-                errorMessage
-              )}`}
-              id="options"
-            >
-              {<InputValue />}
-              <Icon iconType="arrowDown" />
-            </button>
-          </span>
-        </div>
-        {isOpen && (
-          <div className="h-96 w-min overflow-y-auto absolute left-5 mt-2  rounded-md shadow-lg select-none z-50">
-            <div className="rounded-md bg-white shadow-xs pr-8">
-              <div className="py-1 flex flex-col  " role="menu">
-                {timeValues.map((time, index) => (
-                  <div
-                    key={index}
-                    onClick={() => onTimeClick(time)}
-                    className="max-h-96 overflow-y-auto cursor-pointer text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
-                  >
-                    {time}
-                  </div>
-                ))}
+          <h2 className="text-sm font-semibold my-1">Morning</h2>
+          <div className="flex gap-2 flex-wrap">
+            {getTimeOfDay().morning.map((time, index) => (
+              <div
+                key={index}
+                className={`border border-slate-200 rounded-lg p-2 text-sm cursor-pointer ${
+                  selectedTimeRange === time && 'bg-sky-500 text-white'
+                }`}
+                onClick={() => onTimeClick(time)}
+              >
+                {time}
               </div>
-            </div>
+            ))}
           </div>
-        )}
+        </div>
+        <div>
+          <h2 className="text-sm font-semibold my-1">Noon</h2>
+          <div className="flex gap-2 flex-wrap">
+            {getTimeOfDay().noon.map((time, index) => (
+              <div
+                key={index}
+                className={`border border-slate-200 rounded-lg p-2 text-sm cursor-pointer ${
+                  selectedTimeRange === time && 'bg-sky-500 text-white'
+                }`}
+                onClick={() => onTimeClick(time)}
+              >
+                {time}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 className="text-sm font-semibold my-1">Afternoon</h2>
+          <div className="flex gap-2 flex-wrap">
+            {getTimeOfDay().afternoon.map((time, index) => (
+              <div
+                key={index}
+                className={`border border-slate-200 rounded-lg p-2 text-sm cursor-pointer ${
+                  selectedTimeRange === time && 'bg-sky-500 text-white'
+                }`}
+                onClick={() => onTimeClick(time)}
+              >
+                {time}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <InputError errorMessage={errorMessage} />

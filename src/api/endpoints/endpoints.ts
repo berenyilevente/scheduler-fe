@@ -9,8 +9,13 @@ import {
   LoginResponse,
   RegisterArgs,
 } from '@/utils';
+import { PostBooking } from '@/utils/interfaces/booking-interfaces';
+import axios from 'axios';
 import { ApiUrl } from '../utils/constants/apiUrls';
-import { axiosInstance } from '../utils/functions/axiosInstance';
+import {
+  axiosInstance,
+  axiosInstancePublic,
+} from '../utils/functions/axiosInstance';
 import { setupInterceptors } from '../utils/functions/interceptors';
 
 setupInterceptors(store);
@@ -47,9 +52,10 @@ export const getBookingLayoutByIdEndpoint = async (
 };
 
 export const postBookingLayoutEndpoint = async (
+  userId: string,
   bookingLayout: PostBookingLayoutArgs
 ): Promise<void> => {
-  await axiosInstance.post(ApiUrl.PostBookingLayout, bookingLayout);
+  await axiosInstance.post(ApiUrl.PostBookingLayout, { userId, bookingLayout });
 };
 
 export const patchBookingLayoutEndpoint = async (
@@ -102,4 +108,21 @@ export const getRefreshTokenEndpoint = async (refreshToken: string) => {
     refreshToken,
   });
   return response.data;
+};
+
+export const getBookingsEndpoint = async () => {
+  const response = await axiosInstance.get(ApiUrl.GetBookings);
+  return response.data;
+};
+
+export const getBookingByIdController = async (id: string) => {
+  const response = await axiosInstance.get(`${ApiUrl.GetBookingById}/${id}`);
+  return response.data;
+};
+
+export const postBookingEndpoint = async (
+  bookingId: string,
+  inputs: { inputType: string | null; value: string | null }[]
+): Promise<void> => {
+  await axiosInstancePublic.post(ApiUrl.PostBooking, { bookingId, inputs });
 };

@@ -1,7 +1,7 @@
 import { Button, Card, EmailInput, PasswordInput, Icon } from '@/components';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { loginAction } from '@/redux/state/auth-state/authActions';
-import { InputComponent, PrivateRouteUrl, PublicRouteUrl } from '@/utils';
+import { InputType, PrivateRouteUrl, PublicRouteUrl } from '@/utils';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ export const Login: React.FC<LoginProps> = () => {
             <Icon iconType="siteLogo" />
           </div>
           <EmailInput
-            componentType={InputComponent.Email}
+            componentType={InputType.Email}
             onChange={(value) => setEmailInput(value)}
             value={emailInput}
             label="Email"

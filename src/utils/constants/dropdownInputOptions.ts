@@ -1,13 +1,13 @@
-import { InputComponent } from '../enums/input-component';
+import { InputType } from '../enums/input-type';
 import { DropdownOption } from '../interfaces/dropdown-interfaces';
 
 export const dropdownInputOptions: string[] = [
-  InputComponent.Email,
-  InputComponent.Calendar,
-  InputComponent.Dropdown,
-  InputComponent.Password,
-  InputComponent.Phone,
-  InputComponent.Switch,
-  InputComponent.Text,
-  InputComponent.Timepicker,
+  InputType.Email,
+  InputType.Calendar,
+  InputType.Dropdown,
+  InputType.Password,
+  InputType.Phone,
+  InputType.Switch,
+  InputType.Text,
+  InputType.Timepicker,
 ];

@@ -33,7 +33,7 @@ import {
 export interface IDefaultBookingLayoutState {
   isLoading: boolean;
   bookingLayouts: GetBookingLayoutArgs[];
-  bookingLayout: GetBookingLayoutArgs | undefined;
+  bookingLayout: GetBookingLayoutArgs | null;
   error: string | null;
   publicRoute: boolean;
   createSuccess: boolean;
@@ -45,7 +45,7 @@ const defaultBookingLayoutState: IDefaultBookingLayoutState = {
   error: null,
   bookingLayouts: [],
   publicRoute: false,
-  bookingLayout: undefined,
+  bookingLayout: null,
   createSuccess: false,
   deleteSuccess: false,
   patchSuccess: false,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputComponent } from '@/utils';
+import { InputType } from '@/utils';
 import {
   TextInput,
   EmailInput,
@@ -8,7 +8,6 @@ import {
   TimepickerInput,
   PasswordInput,
   PhoneInput,
-  DropdownInput,
 } from '../input-components';
 
 export interface InputComponentHandlerProps {
@@ -28,7 +27,7 @@ export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
 }) => {
   const renderComponent = (componentType: string): JSX.Element => {
     switch (componentType) {
-      case InputComponent.Text:
+      case InputType.Text:
         return (
           <TextInput
             onChange={onChange}
@@ -37,7 +36,7 @@ export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
             value={value}
           />
         );
-      case InputComponent.Email:
+      case InputType.Email:
         return (
           <EmailInput
             onChange={onChange}
@@ -46,7 +45,7 @@ export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
             value={value}
           />
         );
-      case InputComponent.Calendar:
+      case InputType.Calendar:
         return (
           <CalendarInput
             onChange={onChange}
@@ -54,7 +53,7 @@ export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
             required={required}
           />
         );
-      case InputComponent.Timepicker:
+      case InputType.Timepicker:
         return (
           <TimepickerInput
             onChange={onChange}
@@ -62,11 +61,11 @@ export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
             required={required}
           />
         );
-      case InputComponent.Switch:
+      case InputType.Switch:
         return (
           <SwitchInput onChange={onChange} label={label} required={required} />
         );
-      case InputComponent.Password:
+      case InputType.Password:
         return (
           <PasswordInput
             onChange={onChange}
@@ -75,7 +74,7 @@ export const InputComponentHandler: React.FC<InputComponentHandlerProps> = ({
             value={value}
           />
         );
-      case InputComponent.Phone:
+      case InputType.Phone:
         return (
           <PhoneInput
             onChange={onChange}

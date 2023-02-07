@@ -12,7 +12,7 @@ export const User: React.FC<UserProps> = () => {
   function onExport() {
     setExportedButton(
       `<a
-          href={http://127.0.0.1:5173${PublicRouteUrl.NewBooking}63dbc527024382063af4978e}
+          href={http://127.0.0.1:5173${PublicRouteUrl.NewBooking}63e2549fc3c75c3dd3047bd5}
           target="_blank">
           Create a booking
         </a>`
@@ -40,7 +40,7 @@ export const User: React.FC<UserProps> = () => {
     <div className="grid place-content-center mt-96 gap-y-4 ">
       <Button variant="filled">
         <a
-          href={`${PublicRouteUrl.NewBooking}63dbc527024382063af4978e`}
+          href={`${PublicRouteUrl.NewBooking}63e2549fc3c75c3dd3047bd5`}
           target="_blank"
         >
           Create a booking

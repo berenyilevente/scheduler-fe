@@ -12,6 +12,9 @@ import {
   registerEndpoint,
   getUserEndpoint,
   getRefreshTokenEndpoint,
+  getBookingsEndpoint,
+  postBookingEndpoint,
+  getBookingByIdController,
 } from './endpoints/endpoints';
 
 class Client {
@@ -28,6 +31,9 @@ class Client {
   register = registerEndpoint;
   getUser = getUserEndpoint;
   getRefreshToken = getRefreshTokenEndpoint;
+  getBookings = getBookingsEndpoint;
+  getBookingById = getBookingByIdController;
+  postBooking = postBookingEndpoint;
 }
 
 export default new Client();

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   TextInput,
   Button,
@@ -21,9 +21,8 @@ export interface CreateBookingLayoutProps {}
 
 export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
   const dispatch = useAppDispatch();
-  const { createSuccess } = useSelector(
-    (state: AppState) => state.bookingLayouts
-  );
+
+  const { userId } = useSelector((state: AppState) => state.auth);
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -93,7 +92,7 @@ export const CreateBookingLayout: React.FC<CreateBookingLayoutProps> = () => {
     }
 
     dispatch(
-      postBookingLayoutAction({
+      postBookingLayoutAction(userId, {
         inputs: addedInputFields,
         name: bookingLayoutNameValue,
       })

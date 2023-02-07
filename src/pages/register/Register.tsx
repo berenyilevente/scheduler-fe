@@ -1,7 +1,7 @@
 import { Button, Card, EmailInput, PasswordInput, Icon } from '@/components';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { registerAction } from '@/redux/state/auth-state/authActions';
-import { InputComponent } from '@/utils';
+import { InputType } from '@/utils';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,7 +41,7 @@ export const Register: React.FC<RegisterProps> = () => {
             <Icon iconType="siteLogo" />
           </div>
           <EmailInput
-            componentType={InputComponent.Email}
+            componentType={InputType.Email}
             onChange={(value) => setEmailInput(value)}
             value=""
             label="Email"

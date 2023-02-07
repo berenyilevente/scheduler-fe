@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { InputComponent } from '@/utils';
+import { InputType } from '@/utils';
 import {
   InputComponentHandler as InputComponentHandlerComponent,
   InputComponentHandlerProps,
@@ -16,6 +16,6 @@ const Template: Story<InputComponentHandlerProps> = (args) => (
 
 export const InputComponentHandler = Template.bind({});
 InputComponentHandler.args = {
-  component: InputComponent.Calendar,
+  component: InputType.Calendar,
   onChange: (value) => console.log(value),
 };
