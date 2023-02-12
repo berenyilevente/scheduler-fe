@@ -78,7 +78,7 @@ export const DropdownInput: React.FC<DropdownProps> = ({
           </span>
         </div>
         {isOpen && (
-          <div className="absolute left-0 mt-2 w-full rounded-md shadow-lg z-50">
+          <div className="absolute  mt-2 w-min rounded-md shadow-lg z-50">
             <div className="rounded-md bg-white shadow-xs">
               <div className="py-1 flex flex-col" role="menu">
                 {options.map((option, index) => (

@@ -251,30 +251,14 @@ export const siteLogo = (
 export const trash = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
-    viewBox="0 0 48 48"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
   >
-    <g className="nc-icon-wrapper">
+    <g fill="none" className="nc-icon-wrapper">
       <path
-        d="M33.258,47H14.742a5.013,5.013,0,0,1-4.989-4.667L7.623,10h32.8L38.247,42.333A5.013,5.013,0,0,1,33.258,47Z"
-        fill="currentColor"
-      ></path>
-      <path
-        d="M45,9H32V4a3,3,0,0,0-3-3H19a3,3,0,0,0-3,3V9H3a1,1,0,0,0,0,2H45a1,1,0,0,0,0-2ZM18,4a1,1,0,0,1,1-1H29a1,1,0,0,1,1,1V9H18Z"
-        fill="#636363"
-      ></path>
-      <path
-        d="M24.021,39a1,1,0,0,1-1-1V20a1,1,0,0,1,2,0V38A1,1,0,0,1,24.021,39Z"
-        fill="#636363"
-      ></path>
-      <path
-        d="M17,39a1,1,0,0,1-1-1V20a1,1,0,0,1,2,0V38A1,1,0,0,1,17,39Z"
-        fill="#636363"
-      ></path>
-      <path
-        d="M31,39a1,1,0,0,1-1-1V20a1,1,0,0,1,2,0V38A1,1,0,0,1,31,39Z"
-        fill="#636363"
+        d="M16 9v10H8V9h8zm-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+        fill="#212121"
       ></path>
     </g>
   </svg>

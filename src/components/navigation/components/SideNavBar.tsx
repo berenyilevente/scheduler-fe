@@ -22,6 +22,11 @@ export const SideNavBar: React.FC<SideNavBarProps> = () => {
       iconType: 'dashboard',
     },
     {
+      name: t('navigation.calendar'),
+      linkTo: PrivateRouteUrl.Calendar,
+      iconType: 'calendar',
+    },
+    {
       name: t('navigation.bookingLayouts'),
       linkTo: PrivateRouteUrl.BookingLayouts,
       iconType: 'time',

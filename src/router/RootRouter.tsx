@@ -15,6 +15,8 @@ import { AppState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import { Navigation } from '@/components';
+import { CalendarPage } from '@/pages';
 
 export interface RootRouterProps {}
 export const RootRouter: React.FC<RootRouterProps> = () => {
@@ -82,6 +84,15 @@ export const RootRouter: React.FC<RootRouterProps> = () => {
         element={
           <PrivateRoute
             component={<BookingLayouts />}
+            isAuthenticated={!!accessToken}
+          />
+        }
+      />
+      <Route
+        path={PrivateRouteUrl.Calendar}
+        element={
+          <PrivateRoute
+            component={<CalendarPage />}
             isAuthenticated={!!accessToken}
           />
         }

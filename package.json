@@ -11,6 +11,9 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.4",
+    "@fullcalendar/daygrid": "^6.1.4",
+    "@fullcalendar/react": "^6.1.4",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/i18next": "^13.0.0",
     "@types/react-i18next": "^8.1.0",
@@ -38,6 +41,7 @@
     "babel-loader": "^8.3.0",
     "concurrently": "^7.6.0",
     "date-fns": "^2.29.3",
+    "dayjs": "^1.11.7",
     "postcss": "^8.4.21",
     "react-beautiful-dnd": "^13.1.1",
     "react-day-picker": "^8.4.1",

@@ -1,6 +1,7 @@
 export enum PrivateRouteUrl {
   Home = '/',
   Dashboard = '/admin/dashboard',
+  Calendar = '/admin/calendar',
   Admin = '/admin',
   BookingLayouts = '/admin/booking-layouts',
   InputSettings = '/admin/input-settings',

@@ -44,6 +44,20 @@ export interface PostBookingFailure {
   error: string;
 }
 
+export const DELETE_BOOKING_REQUEST = 'DELETE_BOOKING_REQUEST';
+export const DELETE_BOOKING_SUCCESS = 'DELETE_BOOKING_SUCCESS';
+export const DELETE_BOOKING_FAILURE = 'DELETE_BOOKING_FAILURE';
+export interface DeleteBookingRequest {
+  type: typeof DELETE_BOOKING_REQUEST;
+}
+export interface DeleteBookingSuccess {
+  type: typeof DELETE_BOOKING_SUCCESS;
+}
+export interface DeleteBookingFailure {
+  type: typeof DELETE_BOOKING_FAILURE;
+  error: string;
+}
+
 export type BookingActionTypes =
   | GetBookingRequest
   | GetBookingFailure
@@ -53,4 +67,7 @@ export type BookingActionTypes =
   | PostBookingSuccess
   | GetBookingByIdRequest
   | GetBookingByIdFailure
-  | GetBookingByIdSuccess;
+  | GetBookingByIdSuccess
+  | DeleteBookingRequest
+  | DeleteBookingFailure
+  | DeleteBookingSuccess;

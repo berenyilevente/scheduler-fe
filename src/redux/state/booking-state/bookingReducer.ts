@@ -2,6 +2,9 @@ import { GetInputArgs } from '@/utils';
 import { BookingResponse } from '@/utils/interfaces/booking-interfaces';
 import {
   BookingActionTypes,
+  DELETE_BOOKING_FAILURE,
+  DELETE_BOOKING_REQUEST,
+  DELETE_BOOKING_SUCCESS,
   GET_BOOKING_BY_ID_FAILURE,
   GET_BOOKING_BY_ID_REQUEST,
   GET_BOOKING_BY_ID_SUCCESS,
@@ -19,6 +22,7 @@ export interface IDefaultBookingState {
   bookings: BookingResponse[];
   bookingInputs: GetInputArgs[];
   booking: BookingResponse | null;
+  deleteBookingSuccess: boolean;
 }
 const defaultBookingState: IDefaultBookingState = {
   isLoading: false,
@@ -26,6 +30,7 @@ const defaultBookingState: IDefaultBookingState = {
   bookings: [],
   bookingInputs: [],
   booking: null,
+  deleteBookingSuccess: false,
 };
 
 const BookingReducer = (
@@ -90,6 +95,28 @@ const BookingReducer = (
         ...state,
         isLoading: false,
         error: action.error,
+      };
+
+    case DELETE_BOOKING_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        deleteBookingSuccess: false,
+      };
+    case DELETE_BOOKING_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        deleteBookingSuccess: true,
+      };
+    case DELETE_BOOKING_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
+        deleteBookingSuccess: false,
       };
     default:
       return state;

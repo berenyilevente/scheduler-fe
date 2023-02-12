@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { timeValues } from '@/utils';
+import React, { useEffect, useState } from 'react';
 import { InputLabel, InputError } from '@/components';
+import { useSelector } from 'react-redux';
+import { AppState } from '@/redux/store';
+import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
+import { getWorkingHoursAction } from '@/redux/state/settings-state/settingsActions';
 
 export interface TimepickerInputProps {
   onChange: (time: string, componentType: string | null) => void;
@@ -23,10 +26,15 @@ export const TimepickerInput: React.FC<TimepickerInputProps> = ({
 
   //TODO implement time range functionality
   const [selectedTimeRange, setSelectedTimeRange] = useState<string>();
+  const { workingHours } = useSelector((state: AppState) => state.settings);
+
+  const dispatch = useAppDispatch();
   const onTimeClick = (time: string): void => {
     onChange(time, componentType ? componentType : null);
     setSelectedTimeRange(time);
   };
+
+  console.log(workingHours);
 
   //TO DO loop over the avilable times only (available times will come from the backend)
   function getTimeOfDay(): Record<string, string[]> {
@@ -36,8 +44,8 @@ export const TimepickerInput: React.FC<TimepickerInputProps> = ({
       afternoon: [],
     };
 
-    const availableTimes: string[] = timeValues.filter(
-      (timeValue) => bookedTimes?.indexOf(timeValue) !== -1
+    const availableTimes: string[] = workingHours.filter(
+      (workingHour) => bookedTimes?.indexOf(workingHour) !== -1
     );
 
     availableTimes.forEach((time) => {
@@ -57,6 +65,10 @@ export const TimepickerInput: React.FC<TimepickerInputProps> = ({
 
     return categorizedTimes;
   }
+
+  useEffect(() => {
+    dispatch(getWorkingHoursAction());
+  }, []);
 
   return (
     <InputLabel label={''} required={required} errorMessage={errorMessage}>

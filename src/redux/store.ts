@@ -6,6 +6,7 @@ import { Action, configureStore } from '@reduxjs/toolkit';
 import BookingLayoutReducer from './state/booking-layout-state/bookingLayoutReducer';
 import AuthReducer from './state/auth-state/authReducer';
 import BookingReducer from './state/booking-state/bookingReducer';
+import SettingsReducer from './state/settings-state/settingsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +23,7 @@ const authPersistConfig = {
 export const rootReducer = combineReducers({
   bookingLayouts: BookingLayoutReducer,
   bookings: BookingReducer,
+  settings: SettingsReducer,
   auth: persistReducer(authPersistConfig, AuthReducer),
 });
 

@@ -13,3 +13,4 @@ export * from './navigation/Navigation';
 export * from './modal/Modal';
 export * from './card/Card';
 export * from './divider/Divider';
+export * from './calendar/Calendar';

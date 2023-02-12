@@ -3,7 +3,7 @@ import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { getBookingLayoutByIdAction } from '@/redux/state/booking-layout-state/bookingLayoutActions';
 import { postBookingAction } from '@/redux/state/booking-state/bookingActions';
 import { AppState } from '@/redux/store';
-import { useGetData } from '@/utils';
+import { InputType, useGetData } from '@/utils';
 import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -26,6 +26,9 @@ const BookingPage: React.FC<BookingPageProps> = () => {
     }[]
   >([]);
 
+  const [bookedDate, setBookedDate] = useState<string | null>(null);
+  const [bookedTime, setbookedTime] = useState<string | null>(null);
+
   const inputFieldUpdates = useCallback(
     (inputType: string | null, value: string | null, index: number) => {
       setFieldUpdates((prevState) => {
@@ -33,6 +36,13 @@ const BookingPage: React.FC<BookingPageProps> = () => {
         newState[index] = { inputType, value };
         return newState;
       });
+
+      if (inputType === InputType.Calendar) {
+        setBookedDate(value);
+      }
+      if (inputType === InputType.Timepicker) {
+        setbookedTime(value);
+      }
     },
     []
   );
@@ -42,7 +52,16 @@ const BookingPage: React.FC<BookingPageProps> = () => {
       return;
     }
 
-    dispatch(postBookingAction(bookingId, fieldUpdates));
+    if (bookedDate === null || bookedTime === null) {
+      return;
+    }
+
+    dispatch(
+      postBookingAction(bookingId, fieldUpdates, {
+        date: bookedDate,
+        time: bookedTime,
+      })
+    );
   }
   return bookingLayout ? (
     <div className="mt-32 grid m-auto w-1/2">

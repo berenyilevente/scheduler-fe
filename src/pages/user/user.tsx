@@ -40,7 +40,7 @@ export const User: React.FC<UserProps> = () => {
     <div className="grid place-content-center mt-96 gap-y-4 ">
       <Button variant="filled">
         <a
-          href={`${PublicRouteUrl.NewBooking}63e2549fc3c75c3dd3047bd5`}
+          href={`${PublicRouteUrl.NewBooking}63e3fab457047c8877e69bc6`}
           target="_blank"
         >
           Create a booking

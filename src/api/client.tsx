@@ -1,7 +1,5 @@
+import { store } from '@/redux/store';
 import {
-  getInputsEndpoint,
-  postInputEndpoint,
-  deleteInputEndpoint,
   getBookingLayoutEndpoint,
   postBookingLayoutEndpoint,
   getBookingLayoutByIdEndpoint,
@@ -15,12 +13,13 @@ import {
   getBookingsEndpoint,
   postBookingEndpoint,
   getBookingByIdController,
-} from './endpoints/endpoints';
-
+  deleteBookingEndpoint,
+  getWorkingHoursEndpoint,
+  postWorkingHoursEndpoint,
+} from './endpoints';
+import { setupInterceptors } from './utils/functions/interceptors';
+setupInterceptors(store);
 class Client {
-  getInputs = getInputsEndpoint;
-  postInput = postInputEndpoint;
-  deleteInput = deleteInputEndpoint;
   deleteInputFromBookingLayout = deleteInputFromBookingLayoutEndpoint;
   getBookingLayout = getBookingLayoutEndpoint;
   getBookingLayoutById = getBookingLayoutByIdEndpoint;
@@ -34,6 +33,9 @@ class Client {
   getBookings = getBookingsEndpoint;
   getBookingById = getBookingByIdController;
   postBooking = postBookingEndpoint;
+  deleteBooking = deleteBookingEndpoint;
+  getWorkingHours = getWorkingHoursEndpoint;
+  postWorkingHours = postWorkingHoursEndpoint;
 }
 
 export default new Client();
